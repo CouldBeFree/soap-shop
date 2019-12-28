@@ -5,8 +5,11 @@ import scrollBehavior from './router.scrollBehavior.js'
 
 const _f9367a70 = () => interopDefault(import('../pages/category/index.vue' /* webpackChunkName: "pages/category/index" */))
 const _36fa4f9c = () => interopDefault(import('../pages/contact-us.vue' /* webpackChunkName: "pages/contact-us" */))
+const _7a085d42 = () => interopDefault(import('../pages/selected-products.vue' /* webpackChunkName: "pages/selected-products" */))
 const _dd56f506 = () => interopDefault(import('../pages/shop.vue' /* webpackChunkName: "pages/shop" */))
 const _1d3bbe6e = () => interopDefault(import('../pages/shopping-cart.vue' /* webpackChunkName: "pages/shopping-cart" */))
+const _4b5da989 = () => interopDefault(import('../pages/auth/login.vue' /* webpackChunkName: "pages/auth/login" */))
+const _26e516b3 = () => interopDefault(import('../pages/auth/register.vue' /* webpackChunkName: "pages/auth/register" */))
 const _18ac0d9b = () => interopDefault(import('../pages/category/baby-soap/index.vue' /* webpackChunkName: "pages/category/baby-soap/index" */))
 const _578ae2b5 = () => interopDefault(import('../pages/category/bouquets/index.vue' /* webpackChunkName: "pages/category/bouquets/index" */))
 const _2a6ee08c = () => interopDefault(import('../pages/category/cosmetic/index.vue' /* webpackChunkName: "pages/category/cosmetic/index" */))
@@ -39,6 +42,10 @@ export const routerOptions = {
     component: _36fa4f9c,
     name: "contact-us"
   }, {
+    path: "/selected-products",
+    component: _7a085d42,
+    name: "selected-products"
+  }, {
     path: "/shop",
     component: _dd56f506,
     name: "shop"
@@ -46,6 +53,14 @@ export const routerOptions = {
     path: "/shopping-cart",
     component: _1d3bbe6e,
     name: "shopping-cart"
+  }, {
+    path: "/auth/login",
+    component: _4b5da989,
+    name: "auth-login"
+  }, {
+    path: "/auth/register",
+    component: _26e516b3,
+    name: "auth-register"
   }, {
     path: "/category/baby-soap",
     component: _18ac0d9b,

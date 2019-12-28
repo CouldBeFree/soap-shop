@@ -17,10 +17,20 @@
             <span>{{selectedProducts.length}} items</span>
           </nuxt-link>
         </li>
+        <li>
+          <nuxt-link :to="'/auth/login'">
+            <span class="icon-login"></span>
+          </nuxt-link>
+        </li>
+        <li>
+          <nuxt-link :to="'/selected-products'">
+            <span class="icon-heart"></span>
+          </nuxt-link>
+        </li>
       </ul>
     </nav>
-    <div class="sub-nav container-fluid">
-      <ul class="flex align-center align-center">
+    <div class="sub-nav container-fluid flex justify-between">
+      <ul class="flex align-center left-part">
         <li class="logo">
           <nuxt-link :to="'/'">
             <img src="../../assets/images/logo.png" alt="miracle-soap">
@@ -74,6 +84,10 @@
           font-size: 24px;
         }
 
+        .icon-login, .icon-heart {
+          font-size: 20px;
+        }
+
         a {
           &:hover {
             transition: .4s;
@@ -101,8 +115,22 @@
         a {
           font-family: $secondary-font;
           font-size: 14px;
+          color: #003046;
+          font-weight: 600;
+
+          &:hover {
+            transition: .5s;
+            color: #a9b6ba;
+          }
         }
       }
+    }
+  }
+
+  .right-part {
+    span {
+      font-size: 20px;
+      color: $main-color;
     }
   }
 </style>

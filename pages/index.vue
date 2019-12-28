@@ -1,14 +1,15 @@
 <template>
   <div>
-    <h1>Index</h1>
+    <slider></slider>
   </div>
 </template>
 
 <script>
+import slider from "~/components/slider";
 
 export default {
   components: {
-
+    slider
   }
 }
 </script>
