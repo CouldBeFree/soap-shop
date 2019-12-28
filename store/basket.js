@@ -1,5 +1,5 @@
 export const state = () => ({
-
+  selectedProducts: []
 });
 
 export const actions = {

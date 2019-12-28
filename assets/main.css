@@ -26,6 +26,13 @@ ul {
   list-style-type: none;
 }
 
+a {
+  transition: .4s;
+  font-family: inherit;
+  text-decoration: none;
+  color: inherit;
+}
+
 .text-right {
   text-align: right;
 }
@@ -48,4 +55,8 @@ ul {
 
 .justify-end {
   justify-content: flex-end;
+}
+
+.align-center {
+  align-items: center;
 }
