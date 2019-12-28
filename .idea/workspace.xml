@@ -2,24 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b551d94-4983-4913-bb64-76ac654a815c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/images/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/category/baby-soap/index.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/category/bouquets/index.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/category/cosmetic/index.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/category/index.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/category/kits/index.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/category/man/index.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/contact-us.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/shop.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/shopping-cart.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/store/basket.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/store/user.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.nuxt/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/.nuxt/router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layouts/partials/navbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/partials/navbar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/products.js" beforeDir="false" afterPath="$PROJECT_DIR$/store/products.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/category/baby-soap/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/category/baby-soap/index.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,12 +82,24 @@
       <workItem from="1577092038094" duration="9061000" />
       <workItem from="1577104152219" duration="1213000" />
       <workItem from="1577352242049" duration="255000" />
-      <workItem from="1577519130435" duration="8148000" />
+      <workItem from="1577519130435" duration="8501000" />
     </task>
+    <task id="LOCAL-00001" summary="Added nav">
+      <created>1577532383207</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1577532383207</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added nav" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added nav" />
   </component>
   <component name="WindowStateProjectService">
     <state x="449" y="145" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1577530092813">
@@ -114,6 +110,10 @@
       <screen x="67" y="27" width="1299" height="741" />
     </state>
     <state x="452" y="252" width="518" height="288" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/67.27.1299.741@67.27.1299.741" timestamp="1577519707119" />
+    <state x="281" y="27" width="860" height="741" key="CommitChangelistDialog2" timestamp="1577532382116">
+      <screen x="67" y="27" width="1299" height="741" />
+    </state>
+    <state x="281" y="27" width="860" height="741" key="CommitChangelistDialog2/67.27.1299.741@67.27.1299.741" timestamp="1577532382116" />
     <state x="2421" y="316" width="908" height="445" key="EditFileWatcherDialog" timestamp="1577092577890">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
@@ -130,6 +130,10 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2604" y="243" width="541" height="591" key="Github.UntrackedFilesDialog/67.27.1853.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1577352499670" />
+    <state x="311" y="132" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1577532385540">
+      <screen x="67" y="27" width="1299" height="741" />
+    </state>
+    <state x="311" y="132" width="800" height="528" key="Vcs.Push.Dialog.v2/67.27.1299.741@67.27.1299.741" timestamp="1577532385540" />
     <state x="2525" y="275" width="709" height="528" key="find.popup" timestamp="1577100622730">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
