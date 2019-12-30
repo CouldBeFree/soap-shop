@@ -1,15 +1,26 @@
 <template>
   <div>
     <slider></slider>
+    <div v-for="product in products">
+      <product :product="product"></product>
+    </div>
   </div>
 </template>
 
 <script>
 import slider from "~/components/slider";
+import product from "../components/product";
+import { mapState } from 'vuex'
 
 export default {
   components: {
-    slider
+    slider,
+    product
+  },
+  computed: {
+    ...mapState('products', {
+      products: state => state.products
+    })
   }
 }
 </script>

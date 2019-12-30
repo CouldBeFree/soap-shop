@@ -14,7 +14,7 @@
         <li>
           <nuxt-link :to="'/shopping-cart'" class="flex align-center">
             <span class="icon-shopping-cart"></span>
-            <span>{{selectedProducts.length}} items</span>
+            <span>{{selectedProducts.length}} товарів</span>
           </nuxt-link>
         </li>
         <li>
@@ -36,8 +36,13 @@
             <img src="../../assets/images/logo.png" alt="miracle-soap">
           </nuxt-link>
         </li>
-        <li>
-          <nuxt-link :to="'/category/baby-soap'">Дитяче</nuxt-link>
+        <li class="dropdown">
+          <nuxt-link :to="'/category/souvenir'">Сувеніри</nuxt-link>
+          <div class="dropdown-content">
+            <nuxt-link :to="'/category/souvenir/baby-soap'">Дитяче</nuxt-link>
+            <nuxt-link :to="'/category/souvenir/man'">Чоловіче</nuxt-link>
+            <nuxt-link :to="'/category/souvenir/woman'">Жіноче</nuxt-link>
+          </div>
         </li>
         <li>
           <nuxt-link :to="'/category/bouquets'">Мильні букети</nuxt-link>
@@ -47,9 +52,6 @@
         </li>
         <li>
           <nuxt-link :to="'/category/kits'">Набори</nuxt-link>
-        </li>
-        <li>
-          <nuxt-link :to="'/category/man'">Чоловіче</nuxt-link>
         </li>
       </ul>
     </div>
@@ -62,14 +64,39 @@
   export default {
     name: "navbar",
     computed: {
-      ...mapState('basket', {
-        selectedProducts: state => state.selectedProducts
+      ...mapState('user', {
+        selectedProducts: state => state.cart
       })
     }
   }
 </script>
 
 <style scoped lang="scss">
+  .dropdown {
+    position: relative;
+    display: inline-block;
+
+    &:hover .dropdown-content {
+      display: block;
+    }
+
+    &-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 120px;
+      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+      z-index: 10;
+
+      a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+    }
+  }
+
   .nav {
     background: $main-color;
     padding: 15px 0;

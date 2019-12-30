@@ -31,10 +31,19 @@
   }
 </script>
 
-<style scoped lang="scss">
-  .owl-dot {
-    &:focus {
-      outline: none;
+<style lang="scss">
+  .owl-dots {
+    position: absolute;
+    bottom: 0;
+    left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+
+    .owl-dot {
+      &:focus {
+        outline: none;
+      }
     }
   }
 
@@ -52,31 +61,5 @@
       bottom: 0;
       object-fit: cover;
     }
-  }
-
-  img {
-
-  }
-
-  .next {
-    z-index: 1000;
-    font-size: 40px;
-    color: pink;
-    position: absolute;
-    top: 0;
-    left: 10px;
-    bottom: 0;
-    right: 0;
-  }
-
-  .prev {
-    z-index: 1000;
-    font-size: 40px;
-    color: pink;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 10px;
   }
 </style>
