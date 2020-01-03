@@ -3,7 +3,7 @@
     <div class="image-holder">
       <img :src="product.image" :alt="product.name">
     </div>
-    <h1>{{product.name}}</h1>
+    <h5><nuxt-link :to="`/product/${product.id}`">{{product.name}}</nuxt-link></h5>
   </div>
 </template>
 

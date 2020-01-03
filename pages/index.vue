@@ -1,8 +1,10 @@
 <template>
   <div>
     <slider></slider>
-    <div v-for="product in products">
-      <product :product="product"></product>
+    <div class="container-fluid">
+      <div v-for="product in products">
+        <product :product="product"></product>
+      </div>
     </div>
   </div>
 </template>

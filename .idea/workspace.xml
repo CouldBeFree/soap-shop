@@ -2,23 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b551d94-4983-4913-bb64-76ac654a815c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/images/Natural-Cosmetics.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/bath-bombs.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/focus.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/fragrance.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/natural-handmade-soap-etsy.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/slider.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/auth/login.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/auth/register.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/selected-products.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plugins/carousel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/product/_id.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.nuxt/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/.nuxt/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.nuxt/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/.nuxt/router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layouts/default.vue" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/default.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layouts/partials/navbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/partials/navbar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nuxt.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/nuxt.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/product.vue" beforeDir="false" afterPath="$PROJECT_DIR$/components/product.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -101,6 +89,8 @@
       <workItem from="1577519130435" duration="11963000" />
       <workItem from="1577543724156" duration="810000" />
       <workItem from="1577545885836" duration="6691000" />
+      <workItem from="1577955321912" duration="613000" />
+      <workItem from="1578060714135" duration="948000" />
     </task>
     <task id="LOCAL-00001" summary="Added nav">
       <created>1577532383207</created>
