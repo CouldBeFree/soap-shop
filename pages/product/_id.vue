@@ -1,10 +1,15 @@
 <template>
-    <h1>Product</h1>
+    <div>
+      <h1>Product</h1>
+    </div>
 </template>
 
 <script>
   export default {
-    name: "_id"
+    name: "product",
+    mounted() {
+      console.log(this.$route);
+    }
   }
 </script>
 

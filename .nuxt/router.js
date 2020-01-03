@@ -10,13 +10,14 @@ const _4bf9b651 = () => interopDefault(import('../pages/shop.vue' /* webpackChun
 const _c38387cc = () => interopDefault(import('../pages/shopping-cart.vue' /* webpackChunkName: "pages/shopping-cart" */))
 const _9ff02946 = () => interopDefault(import('../pages/auth/login.vue' /* webpackChunkName: "pages/auth/login" */))
 const _b030d742 = () => interopDefault(import('../pages/auth/register.vue' /* webpackChunkName: "pages/auth/register" */))
+const _2b848c6f = () => interopDefault(import('../pages/category/baby-soap/index.vue' /* webpackChunkName: "pages/category/baby-soap/index" */))
 const _9a058d3e = () => interopDefault(import('../pages/category/bouquets/index.vue' /* webpackChunkName: "pages/category/bouquets/index" */))
 const _f43d9190 = () => interopDefault(import('../pages/category/cosmetic/index.vue' /* webpackChunkName: "pages/category/cosmetic/index" */))
 const _0ba98a46 = () => interopDefault(import('../pages/category/kits/index.vue' /* webpackChunkName: "pages/category/kits/index" */))
+const _43209327 = () => interopDefault(import('../pages/category/man/index.vue' /* webpackChunkName: "pages/category/man/index" */))
 const _45a3b910 = () => interopDefault(import('../pages/category/souvenir/index.vue' /* webpackChunkName: "pages/category/souvenir/index" */))
-const _a90f5b6a = () => interopDefault(import('../pages/category/souvenir/baby-soap/index.vue' /* webpackChunkName: "pages/category/souvenir/baby-soap/index" */))
-const _c13623fa = () => interopDefault(import('../pages/category/souvenir/man/index.vue' /* webpackChunkName: "pages/category/souvenir/man/index" */))
-const _5b4372ab = () => interopDefault(import('../pages/category/souvenir/woman/index.vue' /* webpackChunkName: "pages/category/souvenir/woman/index" */))
+const _02ab4262 = () => interopDefault(import('../pages/category/woman/index.vue' /* webpackChunkName: "pages/category/woman/index" */))
+const _5d3b9d0f = () => interopDefault(import('../pages/product/_id.vue' /* webpackChunkName: "pages/product/_id" */))
 const _f9bff1f2 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 // TODO: remove in Nuxt 3
@@ -64,6 +65,10 @@ export const routerOptions = {
     component: _b030d742,
     name: "auth-register"
   }, {
+    path: "/category/baby-soap",
+    component: _2b848c6f,
+    name: "category-baby-soap"
+  }, {
     path: "/category/bouquets",
     component: _9a058d3e,
     name: "category-bouquets"
@@ -76,21 +81,21 @@ export const routerOptions = {
     component: _0ba98a46,
     name: "category-kits"
   }, {
+    path: "/category/man",
+    component: _43209327,
+    name: "category-man"
+  }, {
     path: "/category/souvenir",
     component: _45a3b910,
     name: "category-souvenir"
   }, {
-    path: "/category/souvenir/baby-soap",
-    component: _a90f5b6a,
-    name: "category-souvenir-baby-soap"
+    path: "/category/woman",
+    component: _02ab4262,
+    name: "category-woman"
   }, {
-    path: "/category/souvenir/man",
-    component: _c13623fa,
-    name: "category-souvenir-man"
-  }, {
-    path: "/category/souvenir/woman",
-    component: _5b4372ab,
-    name: "category-souvenir-woman"
+    path: "/product/:id?",
+    component: _5d3b9d0f,
+    name: "product-id"
   }, {
     path: "/",
     component: _f9bff1f2,

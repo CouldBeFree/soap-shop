@@ -2,8 +2,10 @@
   <div>
     <slider></slider>
     <div class="container-fluid">
-      <div v-for="product in products">
-        <product :product="product"></product>
+      <div class="row">
+        <div v-for="product in products" class="col-12 col-md-4 col-xl-2 card-holder">
+          <product :product="product"></product>
+        </div>
       </div>
     </div>
   </div>
@@ -28,5 +30,7 @@ export default {
 </script>
 
 <style lang="scss">
-
+  .card-holder {
+    margin: 15px 0;
+  }
 </style>
