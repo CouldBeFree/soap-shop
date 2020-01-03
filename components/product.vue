@@ -23,7 +23,7 @@
     props: ['product'],
     methods: {
       onClick(id) {
-        console.log(id);
+        console.info(id);
       }
     }
   }
