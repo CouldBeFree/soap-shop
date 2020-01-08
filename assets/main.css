@@ -33,6 +33,48 @@ a {
   color: inherit;
 }
 
+button {
+  transition: .4s;
+  cursor: pointer;
+  border: none;
+}
+
+button:focus {
+  outline: 0;
+}
+
+.button {
+  padding: 10px 0;
+  font-size: 13px;
+  color: #ffffff;
+  text-transform: uppercase;
+  line-height: 1.429;
+  font-family: 'Roboto', sans-serif;
+}
+
+.button.main-button {
+  background: #51BA00;
+}
+
+.button.main-button:hover {
+  transition: .4s;
+  background: #7aa700;
+}
+
+.button.main-button:focus {
+  outline: none;
+}
+
+.button.secondary-button {
+  transition: .4s;
+  background: #003046;
+}
+
+.button.secondary-button:hover {
+  transition: .4s;
+  background: #23272b;
+}
+
 .text-right {
   text-align: right;
 }

@@ -1,16 +1,46 @@
 <template>
-    <div>
-      <h1>Login</h1>
-      <form @submit.prevent="onsubmit">
-        <input
-          v-model="email"
-          type="email"
-          placeholder="Імейл"
-        >
-        <input v-model="password" type="password" placeholder="Пароль">
-        <button type="submit">Логін</button>
+  <div class="form-wrap">
+    <h1 class="text-center">Логін</h1>
+    <no-ssr>
+      <loading
+        :active.sync="isLoading"
+        :is-full-page="fullPage"
+      ></loading>
+    </no-ssr>
+    <ValidationObserver v-slot="{ handleSubmit }">
+      <form @submit.prevent="handleSubmit(onSubmit)" class="flex flex-column">
+          <ValidationProvider name="Email" rules="required|email" class="provider" v-slot="{ errors }">
+            <input
+              :class="{error: errors[0]}"
+              v-model="email"
+              type="email"
+              placeholder="Імейл"
+            >
+            <span class="error-text">{{ errors[0] }}</span>
+          </ValidationProvider>
+          <ValidationProvider class="provider" name="Password" rules="required" v-slot="{ errors }">
+            <input
+              :class="{error: errors[0]}"
+              v-model="password"
+              type="password"
+              placeholder="Пароль"
+            >
+            <span class="error-text">{{ errors[0] }}</span>
+          </ValidationProvider>
+        <button type="submit" class="button main-button">Логін</button>
+        <nuxt-link :to="'/auth/forgot-password'" class="forgot-password">Забув пароль</nuxt-link>
+        <nuxt-link :to="'/auth/register'" class="button secondary-button text-center">Немає акаунту</nuxt-link>
+        <div class="social-login">
+          <button>
+            <span class="icon-facebook-circular-logo"></span>
+          </button>
+          <button>
+            <span class="icon-google-plus"></span>
+          </button>
+        </div>
       </form>
-    </div>
+    </ValidationObserver>
+  </div>
 </template>
 
 <script>
@@ -20,12 +50,14 @@
     data() {
       return {
         email: '',
-        password: ''
+        password: '',
+        isLoading: false,
+        fullPage: true
       }
     },
     methods: {
-      onsubmit() {
-
+      onSubmit() {
+        //this.isLoading = true;
       }
     }
   }
@@ -42,6 +74,7 @@
     border-radius: 0;
     box-shadow: none;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    margin-bottom: 20px;
 
     &:focus {
       transition: border-color .15s ease-in-out,background-color .15s ease-in-out;
@@ -50,7 +83,77 @@
     }
   }
 
-  button {
-    cursor: pointer;
+  .form-wrap {
+    max-width: 550px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+
+  .button {
+    margin-bottom: 5px;
+  }
+
+  .social-login {
+    margin-top: 5px;
+
+    button {
+      cursor: pointer;
+      background: none;
+      border: none;
+
+      &:focus {
+        outline: 0;
+      }
+    }
+
+    span {
+      font-size: 40px;
+    }
+
+    .icon-facebook-circular-logo {
+      color: #3C5998;
+    }
+
+    .icon-google-plus {
+      color: #DD4B3A;
+    }
+  }
+
+  .forgot-password {
+    transition: .4s;
+    align-self: flex-end;
+    margin-bottom: 15px;
+    color: $secondary-dark;
+
+    &:hover {
+      transition: .6s;
+      color: #888;
+    }
+  }
+
+  .provider {
+    & > div{
+      width: 100%;
+    }
+
+    input {
+      width: 100%;
+    }
+  }
+
+  .error {
+    border: 1px solid red;
+
+    &-text {
+      position: relative;
+      bottom: 10px;
+      color: red;
+    }
+  }
+
+  h1 {
+    font-size: 30px;
+    margin-bottom: 10px;
   }
 </style>

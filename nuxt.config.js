@@ -21,12 +21,13 @@ export default {
   */
   loading: { color: '#fff' },
   /*
-  ** Global CSS
+  ** Global CSSv-scroll-lock="opened"
   */
   css: [
     '~/assets/icons/icomoon/style.css',
     '~/assets/bootstrap-grid.css',
-    '~/assets/main.css'
+    '~/assets/main.css',
+    'vue-loading-overlay/dist/vue-loading.css'
   ],
   /*
   ** Plugins to load before mounting the App
@@ -34,7 +35,9 @@ export default {
   plugins: [
     { src: '~plugins/carousel.js', ssr: false },
     { src: '~plugins/lazyload.js', ssr: false },
-    { src: '~plugins/vuelidate.js', ssr: false }
+    { src: '~plugins/validate.js', ssr: false },
+    { src: '~plugins/preloader.js', ssr: false },
+    { src: '~plugins/scrollLock.js', ssr: false }
   ],
   /*
   ** Nuxt.js dev-modules

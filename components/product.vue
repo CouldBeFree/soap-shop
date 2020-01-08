@@ -10,8 +10,8 @@
     <div class="flex justify-between">
       <span class="price"><span class="uah-icon">₴</span>{{product.price}}</span>
       <div class="flex align-center">
-        <span @click="onClick(product.id)" class="icon-shopping-cart"></span>
-        <span @click="onClick(product.id)" class="icon-heart"></span>
+        <span @click="$emit('cartSubmit', product)" class="icon-shopping-cart"></span>
+        <span @click="$emit('likeSubmit', product)" class="icon-heart"></span>
       </div>
     </div>
   </div>

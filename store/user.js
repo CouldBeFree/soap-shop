@@ -1,12 +1,15 @@
 export const state = () => ({
+  user: {},
   cart: []
 });
 
-export const actions = {
-
+export const mutations = {
+  setProducts(state, products) {
+    state.cart = products;
+  }
 };
 
-export const mutations = {
+export const actions = {
 
 };
 
