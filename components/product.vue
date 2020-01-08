@@ -2,7 +2,7 @@
   <div>
     <nuxt-link :to="{ name: 'product-id', params: {id: product.id} }">
       <div class="image-holder">
-        <img :src="product.image" :alt="product.name">
+        <img v-lazy="product.image" :alt="product.name">
       </div>
     </nuxt-link>
     <h5 class="sub-headline"><nuxt-link :to="{name: `category-${product.category}`}">{{product.category}}</nuxt-link></h5>

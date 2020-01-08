@@ -32,7 +32,9 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    { src: '~plugins/carousel.js', ssr: false }
+    { src: '~plugins/carousel.js', ssr: false },
+    { src: '~plugins/lazyload.js', ssr: false },
+    { src: '~plugins/vuelidate.js', ssr: false }
   ],
   /*
   ** Nuxt.js dev-modules

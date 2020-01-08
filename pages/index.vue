@@ -3,7 +3,7 @@
     <slider></slider>
     <div class="container-fluid">
       <div class="row">
-        <div v-for="product in products" class="col-12 col-md-4 col-xl-2 card-holder">
+        <div v-for="product in products" class="col-12 col-md-4 col-xl-3 card-holder">
           <product :product="product"></product>
         </div>
       </div>
