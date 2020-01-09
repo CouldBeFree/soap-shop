@@ -9,6 +9,15 @@
         <h4 class="modal-title text-center">{{title}}</h4>
       </template>
     </is-not-signed-in>
+    <cartModal
+      v-if="cartModalOpen"
+      v-scroll-lock="cartModalOpen"
+      @close="cartModalOpen = false"
+    >
+      <template #title>
+        <h4 class="modal-title text-center">{{title}} успішно додано до корзини</h4>
+      </template>
+    </cartModal>
     <no-ssr>
       <loading
         :active.sync="isLoading"
@@ -34,6 +43,7 @@
 
 <script>
 import isNotSignedIn from "../components/modal/isNotSignedIn";
+import cartModal from "../components/modal/cartModal";
 import slider from "~/components/slider";
 import product from "../components/product";
 import { mapState, mapMutations } from 'vuex';
@@ -45,13 +55,15 @@ export default {
       isLoading: false,
       isOpen: false,
       fullPage: true,
-      title: ''
+      title: '',
+      cartModalOpen: true
     }
   },
   components: {
     slider,
     isNotSignedIn,
-    product
+    product,
+    cartModal
   },
   computed: {
     ...mapState('products', {
@@ -73,6 +85,8 @@ export default {
         localStorage.setItem('cart', JSON.stringify(this.cartProducts));
         const productsCopy = [...this.cartProducts];
         this.setProducts(productsCopy);
+        this.title = item.name;
+        this.cartModalOpen = true;
         this.isLoading = false;
       }
     },
@@ -84,9 +98,10 @@ export default {
     }
   },
   mounted() {
-    const cartProducts = localStorage.getItem('cart');
-    if (cartProducts) {
-      this.cartProducts.push(cartProducts);
+    let cartProducts = localStorage.getItem('cart');
+    cartProducts = cartProducts ? JSON.parse(cartProducts) : [];
+    if (cartProducts.length) {
+      this.cartProducts = cartProducts;
       const productsCopy = [...this.cartProducts];
       this.setProducts(productsCopy);
     }
