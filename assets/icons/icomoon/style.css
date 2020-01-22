@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?fe1th5');
-  src:  url('fonts/icomoon.eot?fe1th5#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?fe1th5') format('truetype'),
-    url('fonts/icomoon.woff?fe1th5') format('woff'),
-    url('fonts/icomoon.svg?fe1th5#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?9m1ha9');
+  src:  url('fonts/icomoon.eot?9m1ha9#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?9m1ha9') format('truetype'),
+    url('fonts/icomoon.woff?9m1ha9') format('woff'),
+    url('fonts/icomoon.svg?9m1ha9#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,36 +25,39 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-facebook-circular-logo:before {
-  content: "\e909";
-}
-.icon-google-plus:before {
-  content: "\e90a";
-}
 .icon-dollar:before {
   content: "\e900";
 }
 .icon-envelope:before {
   content: "\e901";
 }
-.icon-heart:before {
+.icon-facebook-circular-logo:before {
   content: "\e902";
 }
-.icon-house:before {
+.icon-google-plus:before {
   content: "\e903";
 }
-.icon-login:before {
+.icon-heart:before {
   content: "\e904";
 }
-.icon-money:before {
+.icon-house:before {
   content: "\e905";
 }
-.icon-phone:before {
+.icon-instagram:before {
   content: "\e906";
 }
-.icon-shopping-cart:before {
+.icon-login:before {
   content: "\e907";
 }
-.icon-uah:before {
+.icon-money:before {
   content: "\e908";
+}
+.icon-phone:before {
+  content: "\e909";
+}
+.icon-shopping-cart:before {
+  content: "\e90a";
+}
+.icon-uah:before {
+  content: "\e90b";
 }

@@ -2,18 +2,18 @@
   <div>
     <navbar></navbar>
     <nuxt />
-    <footer></footer>
+    <footer-part></footer-part>
   </div>
 </template>
 
 <script>
   import navbar from "./partials/navbar";
-  import footer from "./partials/footer";
+  import footerPart from "./partials/footerPart";
 
   export default {
     components: {
       navbar,
-      footer
+      footerPart
     }
   }
 </script>
