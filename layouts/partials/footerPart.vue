@@ -12,6 +12,12 @@
         <nuxt-link :to="'/'">Мій обліковий запис</nuxt-link>
       </li>
     </ul>
+    <div class="phone-holder">
+      <a href="tel:+6494461709">
+        <span class="icon-phone"></span>
+        +6494461709
+      </a>
+    </div>
     <ul class="flex justify-end social-holder">
       <li>
         <a target="_blank" href="https://www.instagram.com/">
@@ -39,16 +45,24 @@
     color: #ffffff;
     padding: 45px 0;
 
+    .phone-holder {
+      margin: 20px 0;
+
+      a {
+        &:hover {
+          color: #96cd00;
+        }
+      }
+    }
+
     .footer-nav {
-      padding: 30px 0;
+      padding-top: 30px;
       font-size: 15px;
 
       li {
         margin-right: 20px;
 
         a {
-          transition: .6s;
-
           &:hover {
             transition: .6s;
             color: #96cd00;
@@ -64,8 +78,6 @@
         margin-left: 10px;
 
         a {
-          transition: .6s;
-
           &:hover {
             transition: .6s;
             color: #96cd00;
