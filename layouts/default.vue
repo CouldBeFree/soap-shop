@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="content-wrapper">
     <navbar></navbar>
-    <nuxt />
+    <nuxt class="main" />
     <footer-part></footer-part>
   </div>
 </template>
@@ -18,6 +18,15 @@
   }
 </script>
 
-<style>
+<style scoped lang="scss">
+  .content-wrapper {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: space-between;
 
+    .main {
+      flex: 1;
+    }
+  }
 </style>
