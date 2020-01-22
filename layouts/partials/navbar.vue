@@ -12,7 +12,7 @@
           <nuxt-link :to="'/category'">Магазин</nuxt-link>
         </li>
         <li>
-          <nuxt-link :to="'/shopping-cart'" class="flex align-center">
+          <nuxt-link :to="'/cart'" class="flex align-center">
             <span class="icon-shopping-cart"></span>
             <span>{{selectedProducts.length}} товарів</span>
           </nuxt-link>

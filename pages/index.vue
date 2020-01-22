@@ -56,7 +56,7 @@ export default {
       isOpen: false,
       fullPage: true,
       title: '',
-      cartModalOpen: true
+      cartModalOpen: false
     }
   },
   components: {
