@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const mongoosePaginate = require('mongoose-paginate');
 
-const ModelSchema = new Schema({
+const ProductSchema = new Schema({
   name: {
     type: String,
     required: [true, 'Name is required'],
@@ -24,11 +24,11 @@ const ModelSchema = new Schema({
     required: [true, 'Price is required'],
   },
   thumb: {
-    type: Buffer,
-    contentType: String
-  }
+    url: String
+  },
+  images: [{url: String}]
 });
 
-ModelSchema.plugin(mongoosePaginate);
+ProductSchema.plugin(mongoosePaginate);
 
-module.exports = mongoose.model('Product', ModelSchema);
+module.exports = mongoose.model('Product', ProductSchema);

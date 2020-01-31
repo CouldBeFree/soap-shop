@@ -1,16 +1,24 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const path = require('path');
+const errorHandler = require('./middleware/error');
 const morgan = require('morgan');
+const bodyParser = require('body-parser');
 
-//Dev logging middleware
-if(process.env.NODE_ENV === 'development'){
-  app.use(morgan('dev'))
-}
+app.use(morgan('dev'));
 
-app.use(express.static('public'));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/uploads', express.static('uploads'));
+
+/* Import routes */
+const product = require('./routes/product');
+
+/* Mount routes */
+app.use('/api/v1/product', product);
+
+app.use(errorHandler);
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 mongoose.connect('mongodb://localhost:27017/soap', {
   useNewUrlParser: true,
@@ -20,12 +28,20 @@ mongoose.connect('mongodb://localhost:27017/soap', {
 });
 
 const db = mongoose.connection;
+
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
   console.log('Database connected')
 });
 
 const port = 5000;
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Server is listening on port ${port}`)
+});
+
+// Handle unhandled promise rejection
+process.on('unhandledRejection', (err, promise) => {
+  console.log(`Error: ${err.message}`);
+  // Close server and exit process
+  server.close(() => process.exit(1));
 });
