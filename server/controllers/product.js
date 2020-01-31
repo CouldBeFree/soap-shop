@@ -30,3 +30,21 @@ exports.postProduct = asyncHandler(async (req, res, next) => {
     data: savedProduct
   })
 });
+
+// @desc Delete product
+// @route DELETE api/v1/product/:id
+// @access Private
+exports.removeProduct = asyncHandler(async (req, res, next) => {
+  const product = await Product.findById(req.params.id);
+
+  if(!product) {
+    return next(new errorResponse(`No product with the id of ${req.params.id}`), 404)
+  }
+
+  await product.remove();
+
+  res.status(200).json({
+    success: true,
+    data: {}
+  })
+});
