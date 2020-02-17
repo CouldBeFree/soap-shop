@@ -7,18 +7,20 @@ const bodyParser = require('body-parser');
 
 app.use(morgan('dev'));
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
 app.use('/uploads', express.static('uploads'));
 
 /* Import routes */
 const product = require('./routes/product');
+const user = require('./routes/user');
 
 /* Mount routes */
 app.use('/api/v1/product', product);
+app.use('/api/v1/user', user);
 
 app.use(errorHandler);
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
 
 mongoose.connect('mongodb://localhost:27017/soap', {
   useNewUrlParser: true,
