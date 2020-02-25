@@ -5,7 +5,7 @@ const errorResponse = require('../utils/errorResponse');
 // @desc Add a product
 // @route POST api/v1/product/
 // @access Private
-exports.postProduct = asyncHandler(async (req, res, next) => {
+exports.postProduct = asyncHandler(async (req, res) => {
   const images = [];
   const files = req.files['images'];
   if(files && files.length){

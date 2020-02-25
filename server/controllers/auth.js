@@ -44,7 +44,7 @@ exports.login = asyncHandler(async (req, res, next) => {
 // @route   GET /api/v1/me
 // @access  Private
 exports.getMe = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.params.id);
+  const user = req.user;
 
   res.status(200).json({
     success: true,
