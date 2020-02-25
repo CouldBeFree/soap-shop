@@ -1,7 +1,8 @@
 const User = require('../models/user');
 const asyncHandler = require('../middleware/async');
 const errorResponse = require('../utils/errorResponse');
-const jwt = require('jsonwebtoken');
+const { JWT } = require('google-auth-library');
+const keys = require('../client_secret_apps.googleusercontent.com.json');
 
 // @desc Register new user
 // @route POST api/v1/register/
@@ -38,6 +39,25 @@ exports.login = asyncHandler(async (req, res, next) => {
   }
 
   sendTokenResponse(user, 200, res);
+});
+
+// @desc    Login with Google
+// @route   PUT /api/v1/auth/signin-google
+// @access  Public
+exports.googleOAuthLogin = asyncHandler(async (req, res, next) => {
+  async function main() {
+    const client = new JWT(
+      keys.client_email,
+      null,
+      keys.private_key,
+      ['https://www.googleapis.com/auth/cloud-platform'],
+    );
+    const url = `https://dns.googleapis.com/dns/v1/projects/${keys.project_id}`;
+    const res = await client.request({url});
+    console.log(res.data);
+  }
+
+  main().catch(console.error);
 });
 
 // @desc    Get current logged user
