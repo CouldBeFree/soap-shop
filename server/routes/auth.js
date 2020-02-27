@@ -13,6 +13,6 @@ router.put('/updatedetails', protect, updateDetails);
 
 router.put('/updatepassword', protect, updatePassword);
 
-router.get('/signin-google', googleOAuthLogin);
+router.post('/signin-google', googleOAuthLogin);
 
 module.exports = router;

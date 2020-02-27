@@ -30,20 +30,38 @@
         <button type="submit" class="button main-button">Логін</button>
         <nuxt-link :to="'/auth/forgot-password'" class="forgot-password">Забув пароль</nuxt-link>
         <nuxt-link :to="'/auth/register'" class="button secondary-button text-center">Немає акаунту</nuxt-link>
-        <div class="social-login">
-          <button>
-            <span class="icon-facebook-circular-logo"></span>
-          </button>
-          <button>
-            <span class="icon-google-plus"></span>
-          </button>
-        </div>
       </form>
     </ValidationObserver>
+    <div class="social-login">
+      <button>
+        <span class="icon-facebook-circular-logo"></span>
+      </button>
+      <no-ssr>
+        <GoogleLogin :params="params" :onSuccess="onSuccess" :onFailure="onFailure">
+          <span class="icon-google-plus"></span>
+        </GoogleLogin>
+        <v-facebook-login
+          app-id="966242223397117"
+          @login="onLogin"
+          @logout="onLogout"
+          @sdk-loaded="sdkLoaded">
+        >
+          <span class="icon-google-plus"></span>
+        </v-facebook-login>
+        <facebook-login class="button"
+                        appId="326022817735322"
+                        @login="getUserData"
+                        @logout="onLogout"
+                        @get-initial-status="getUserData">
+        </facebook-login>
+      </no-ssr>
+    </div>
   </div>
 </template>
 
 <script>
+  import GoogleLogin from 'vue-google-login';
+  import facebookLogin from 'facebook-login-vuejs';
 
   export default {
     name: "login",
@@ -52,12 +70,58 @@
         email: '',
         password: '',
         isLoading: false,
-        fullPage: true
+        fullPage: true,
+        params: {
+          client_id: '59305806445-6du20q97skt3i8djdhtqgfcgtv185b76.apps.googleusercontent.com'
+        },
+        renderParams: {
+          width: 250,
+          height: 50,
+          longtitle: true
+        },
+        isConnected: false,
+        name: '',
+        personalID: '',
+        FB: undefined
       }
+    },
+    components: {
+      GoogleLogin,
+      facebookLogin
     },
     methods: {
       onSubmit() {
         //this.isLoading = true;
+      },
+      onSuccess(googleUser) {
+        console.log(googleUser);
+
+        // This only gets the user information: id, name, imageUrl and email
+        console.log(googleUser.getBasicProfile());
+      },
+      onFailure(err) {
+        console.error(err)
+      },
+      getUserData() {
+        this.FB.api('/me', 'GET', { fields: 'id,name,email' },
+          userInformation => {
+            this.personalID = userInformation.id;
+            this.email = userInformation.email;
+            this.name = userInformation.name;
+          }
+        )
+      },
+      sdkLoaded(payload) {
+        this.isConnected = payload.isConnected;
+        this.FB = payload.FB;
+        if (this.isConnected) this.getUserData()
+      },
+      onLogin() {
+        this.isConnected = true;
+        this.getUserData()
+      },
+      onLogout() {
+        this.isConnected = false;
       }
     }
   }
