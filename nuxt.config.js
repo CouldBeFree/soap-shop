@@ -37,8 +37,7 @@ export default {
     { src: '~plugins/lazyload.js', ssr: false },
     { src: '~plugins/validate.js', ssr: false },
     { src: '~plugins/preloader.js', ssr: false },
-    { src: '~plugins/scrollLock.js', ssr: false },
-    { src: '~plugins/facebook.js', ssr: false }
+    { src: '~plugins/scrollLock.js', ssr: false }
   ],
   /*
   ** Nuxt.js dev-modules

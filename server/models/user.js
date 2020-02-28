@@ -27,6 +27,14 @@ const userSchema = new Schema({
     type: String,
     required: [true, 'Password is required']
   },
+  authMethod: [{
+    type: String,
+    id: String,
+    email: {
+      required: [true, 'Email address is required']
+    },
+    name: String
+  }],
   basket: {
     type: Array
   },

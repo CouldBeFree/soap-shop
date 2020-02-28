@@ -1,7 +1,6 @@
 const User = require('../models/user');
 const asyncHandler = require('../middleware/async');
 const errorResponse = require('../utils/errorResponse');
-const jwt = require('jsonwebtoken');
 
 // @desc Register new user
 // @route POST api/v1/register/
@@ -44,7 +43,9 @@ exports.login = asyncHandler(async (req, res, next) => {
 // @route   PUT /api/v1/auth/signin-google
 // @access  Public
 exports.googleOAuthLogin = asyncHandler(async (req, res, next) => {
+  const user = req.body;
 
+  console.log(user);
 });
 
 // @desc    Get current logged user

@@ -33,26 +33,18 @@
       </form>
     </ValidationObserver>
     <div class="social-login">
-      <button>
+      <!--<button>
         <span class="icon-facebook-circular-logo"></span>
-      </button>
+      </button>-->
       <no-ssr>
         <GoogleLogin :params="params" :onSuccess="onSuccess" :onFailure="onFailure">
           <span class="icon-google-plus"></span>
         </GoogleLogin>
-        <v-facebook-login
-          app-id="966242223397117"
-          @login="onLogin"
-          @logout="onLogout"
-          @sdk-loaded="sdkLoaded">
+        <facebook-login
+          class="button"
+          appId="198282397928750"
+          @login="getUserData"
         >
-          <span class="icon-google-plus"></span>
-        </v-facebook-login>
-        <facebook-login class="button"
-                        appId="326022817735322"
-                        @login="getUserData"
-                        @logout="onLogout"
-                        @get-initial-status="getUserData">
         </facebook-login>
       </no-ssr>
     </div>
@@ -79,10 +71,10 @@
           height: 50,
           longtitle: true
         },
-        isConnected: false,
         name: '',
         personalID: '',
-        FB: undefined
+        FB: {},
+        socialEmail: ''
       }
     },
     components: {
@@ -94,34 +86,25 @@
         //this.isLoading = true;
       },
       onSuccess(googleUser) {
-        console.log(googleUser);
-
-        // This only gets the user information: id, name, imageUrl and email
-        console.log(googleUser.getBasicProfile());
+        const profile = googleUser.getBasicProfile();
+        this.personalID = profile.dV;
+        this.socialEmail = profile.zu;
+        this.name = profile.Ad;
       },
       onFailure(err) {
         console.error(err)
       },
-      getUserData() {
-        this.FB.api('/me', 'GET', { fields: 'id,name,email' },
+      async getUserData(data) {
+        this.FB = data.FB;
+        if (Object.keys(this.FB).length > 1) {
+          this.FB.api('/me', 'GET', { fields: 'id,name,email' },
           userInformation => {
             this.personalID = userInformation.id;
-            this.email = userInformation.email;
+            this.socialEmail = userInformation.email;
             this.name = userInformation.name;
           }
-        )
-      },
-      sdkLoaded(payload) {
-        this.isConnected = payload.isConnected;
-        this.FB = payload.FB;
-        if (this.isConnected) this.getUserData()
-      },
-      onLogin() {
-        this.isConnected = true;
-        this.getUserData()
-      },
-      onLogout() {
-        this.isConnected = false;
+        );
+        }
       }
     }
   }
