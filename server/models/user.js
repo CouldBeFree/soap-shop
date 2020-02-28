@@ -10,31 +10,56 @@ const validateEmail = email =>  {
 };
 
 const userSchema = new Schema({
-  name: {
+  method: {
     type: String,
-    required: [true, 'Name is required'],
-    unique: true
+    enum: ['local', 'google', 'facebook'],
+    required: true
   },
-  email: {
-    type: String,
-    unique: true,
-    trim: true,
-    required: [true, 'Email address is required'],
-    validate: [validateEmail, 'Please fill a valid email address'],
-    match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
-  },
-  password: {
-    type: String,
-    required: [true, 'Password is required']
-  },
-  authMethod: [{
-    type: String,
-    id: String,
-    email: {
-      required: [true, 'Email address is required']
+  local: {
+    name: {
+      type: String,
+      //unique: true
     },
-    name: String
-  }],
+    email: {
+      type: String,
+      trim: true,
+      validate: [validateEmail, 'Please fill a valid email address']
+    },
+    password: {
+      type: String,
+    },
+  },
+  google: {
+    id: {
+      type: String
+    },
+    name: {
+      type: String,
+      //unique: true
+    },
+    email: {
+      type: String,
+      trim: true,
+      validate: [validateEmail, 'Please fill a valid email address']
+    },
+  },
+  facebook: {
+    id: {
+      type: String
+    },
+    name: {
+      type: String,
+      //required: [true, 'Name is required'],
+      //unique: true
+    },
+    email: {
+      type: String,
+      //unique: true,
+      trim: true,
+      //required: [true, 'Email address is required'],
+      validate: [validateEmail, 'Please fill a valid email address']
+    },
+  },
   basket: {
     type: Array
   },

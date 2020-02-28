@@ -48,6 +48,9 @@
         </facebook-login>
       </no-ssr>
     </div>
+    <h4>Name {{name}}</h4>
+    <h4>Id {{personalID}}</h4>
+    <h4>Email {{socialEmail}}</h4>
   </div>
 </template>
 

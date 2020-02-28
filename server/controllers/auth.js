@@ -40,12 +40,55 @@ exports.login = asyncHandler(async (req, res, next) => {
 });
 
 // @desc    Login with Google
-// @route   PUT /api/v1/auth/signin-google
+// @route   POST /api/v1/auth/signin-google
 // @access  Public
 exports.googleOAuthLogin = asyncHandler(async (req, res, next) => {
-  const user = req.body;
+  const user = {
+    method: 'google',
+    google: {
+      id: req.body.id,
+      email: req.body.email,
+      name: req.body.name
+    }
+  };
 
-  console.log(user);
+  const existingUser = await User.findOne({ "google.id": req.body.id });
+
+  console.info('existingUser', existingUser);
+
+  if(existingUser === null) {
+    const savedUser = await User.create(user);
+    sendTokenResponse(savedUser, 200, res);
+  } else {
+    sendTokenResponse(existingUser, 200, res);
+  }
+});
+
+// @desc    Login with Google
+// @route   POST /api/v1/auth/signin-facebook
+// @access  Public
+exports.facebookLogin = asyncHandler(async (req, res, next) => {
+  const user = {
+    method: 'facebook',
+    facebook: {
+      id: req.body.id,
+      email: req.body.email,
+      name: req.body.name
+    }
+  };
+
+  console.info('user', user);
+
+  const existingUser = await User.findOne({ "facebook.id": req.body.id });
+
+  if(existingUser === null) {
+    console.log('Not exists');
+    const savedUser = await User.create(user);
+    sendTokenResponse(savedUser, 200, res);
+  } else {
+    console.log('Exists');
+    sendTokenResponse(existingUser, 200, res);
+  }
 });
 
 // @desc    Get current logged user
