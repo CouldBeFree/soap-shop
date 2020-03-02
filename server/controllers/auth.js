@@ -99,6 +99,26 @@ exports.updatePassword = asyncHandler(async (req, res, next) => {
   sendTokenResponse(user, 200, res);
 });
 
+// @desc    Forgot password
+// @route   PUT /api/v1/auth/forgot-password
+// @access  Private
+exports.forgotPassword = asyncHandler(async (req, res, next) => {
+  console.log('email', req.body.email);
+  const { email } = req.body.email;
+
+  const user = await User.findOne({ $and: [ {method: 'local'}, { "local.email": req.body.email } ] });
+
+  // Check if user exists
+  if(!user){
+    return next(new errorResponse(`There is no user with email ${req.body.email}`, 404))
+  }
+
+  // Get reset token
+  const resetToken = user.getResetPasswordToken();
+
+  sendTokenResponse(user, 200, res);
+});
+
 // Get token from model, create cookie and send response
 const sendTokenResponse = (user, statusCode, res) => {
   // Create token
@@ -118,6 +138,7 @@ const sendTokenResponse = (user, statusCode, res) => {
     .cookie('token', token, options)
     .json({
       success: true,
+      user,
       token
     })
 };
