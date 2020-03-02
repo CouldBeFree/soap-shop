@@ -17,8 +17,7 @@ const userSchema = new Schema({
   },
   local: {
     name: {
-      type: String,
-      //unique: true
+      type: String
     },
     email: {
       type: String,
@@ -34,13 +33,11 @@ const userSchema = new Schema({
       type: String
     },
     name: {
-      type: String,
-      //unique: true
+      type: String
     },
     email: {
       type: String,
-      trim: true,
-      validate: [validateEmail, 'Please fill a valid email address']
+      lowercase: true
     },
   },
   facebook: {
@@ -48,16 +45,11 @@ const userSchema = new Schema({
       type: String
     },
     name: {
-      type: String,
-      //required: [true, 'Name is required'],
-      //unique: true
+      type: String
     },
     email: {
       type: String,
-      //unique: true,
-      trim: true,
-      //required: [true, 'Email address is required'],
-      validate: [validateEmail, 'Please fill a valid email address']
+      lowercase: true
     },
   },
   basket: {

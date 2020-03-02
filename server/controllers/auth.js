@@ -5,46 +5,34 @@ const errorResponse = require('../utils/errorResponse');
 // @desc Register new user
 // @route POST api/v1/register/
 // @access Public
-exports.registerUser = asyncHandler(async (req, res) => {
+exports.registerUser = asyncHandler(async (req, res, next) => {
+  const { email, password, name } = req.body;
+
+  //Check if user exists
+  const isUserExists = await User.findOne({ "local.email": email });
+  if(isUserExists) {
+     return next(new errorResponse(`User with email ${email} already exists`, 404))
+  }
+
   // Create a new user
   const newUser = new User({
     method: 'local',
     local: {
-      email: req.body.email,
-      password: req.body.password,
-      name: req.body.name
+      email: email,
+      password: password,
+      name: name
     }
   });
 
   await newUser.save();
 
-  sendTokenResponse(newUser, 200, res);
+  sendTokenResponse(newUser, 201, res);
 });
 
 // @desc    Login user
 // @route   POST /api/v1/auth/login
 // @access  Public
 exports.login = asyncHandler(async (req, res, next) => {
-  /*const { password, email } = req.body;
-
-  // Validate
-  if(!password || !email){
-    return next(new errorResponse('Please provide an email & password', 400))
-  }
-
-  // Check for user
-  const user = await User.findOne({email});
-
-  if(!user){
-    return next(new errorResponse('Invalid credentials', 401))
-  }
-
-  const isMatch = await user.matchPassword(password);
-
-  if(!isMatch){
-    return next(new errorResponse('Invalid credentials', 401))
-  }*/
-
   sendTokenResponse(req.user, 200, res);
 });
 
@@ -52,25 +40,7 @@ exports.login = asyncHandler(async (req, res, next) => {
 // @route   POST /api/v1/auth/signin-google
 // @access  Public
 exports.googleOAuthLogin = asyncHandler(async (req, res, next) => {
-  const user = {
-    method: 'google',
-    google: {
-      id: req.body.id,
-      email: req.body.email,
-      name: req.body.name
-    }
-  };
-
-  const existingUser = await User.findOne({ "google.id": req.body.id });
-
-  console.info('existingUser', existingUser);
-
-  if(existingUser === null) {
-    const savedUser = await User.create(user);
-    sendTokenResponse(savedUser, 200, res);
-  } else {
-    sendTokenResponse(existingUser, 200, res);
-  }
+  sendTokenResponse(req.user, 200, res);
 });
 
 // @desc    Login with Google
@@ -91,11 +61,9 @@ exports.facebookLogin = asyncHandler(async (req, res, next) => {
   const existingUser = await User.findOne({ "facebook.id": req.body.id });
 
   if(existingUser === null) {
-    console.log('Not exists');
     const savedUser = await User.create(user);
     sendTokenResponse(savedUser, 200, res);
   } else {
-    console.log('Exists');
     sendTokenResponse(existingUser, 200, res);
   }
 });
