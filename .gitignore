@@ -9,6 +9,7 @@ yarn-error.log*
 
 # Images
 server/uploads
+uploads
 
 # Runtime data
 pids

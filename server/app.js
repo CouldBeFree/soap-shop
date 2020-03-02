@@ -5,7 +5,6 @@ const errorHandler = require('./middleware/error');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const multerSettings = require('./utils/multer');
-const passport = require('passport');
 
 require('dotenv').config();
 app.use(morgan('dev'));
@@ -15,15 +14,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use('/uploads', express.static('uploads'));
 
-// Passport Config
-//require('./config/passport')(passport);
-
 // Multer middleware
 app.all('*', multerSettings);
-
-// Passport middleware
-//app.use(passport.initialize());
-//app.use(passport.session());
 
 /* Import routes */
 const product = require('./routes/product');

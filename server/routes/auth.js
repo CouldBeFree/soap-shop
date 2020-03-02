@@ -7,7 +7,7 @@ const passportConf = require('../config/passport');
 
 router.post('/register', registerUser);
 
-router.post('/login', login);
+router.post('/login', passport.authenticate('local', { session: false }), login);
 
 router.get('/getme', passport.authenticate('jwt', { session: false }), getMe);
 

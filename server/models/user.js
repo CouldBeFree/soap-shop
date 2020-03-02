@@ -87,7 +87,7 @@ userSchema.pre('save', async function (next) {
   }
 
   const salt = await bcrypt.genSalt(10);
-  
+
   // Re-assign hashed version over original, plain text password
   this.local.password = await bcrypt.hash(this.local.password, salt);
 
@@ -103,7 +103,7 @@ userSchema.methods.getSignedJwtToken = function(){
 
 // Match user entered password to hashed password in database
 userSchema.methods.matchPassword = async function(password){
-  return await bcrypt.compare(password, this.password);
+  return await bcrypt.compare(password, this.local.password);
 };
 
 // Generate and reset password token
