@@ -47,25 +47,7 @@ exports.googleOAuthLogin = asyncHandler(async (req, res, next) => {
 // @route   POST /api/v1/auth/signin-facebook
 // @access  Public
 exports.facebookLogin = asyncHandler(async (req, res, next) => {
-  const user = {
-    method: 'facebook',
-    facebook: {
-      id: req.body.id,
-      email: req.body.email,
-      name: req.body.name
-    }
-  };
-
-  console.info('user', user);
-
-  const existingUser = await User.findOne({ "facebook.id": req.body.id });
-
-  if(existingUser === null) {
-    const savedUser = await User.create(user);
-    sendTokenResponse(savedUser, 200, res);
-  } else {
-    sendTokenResponse(existingUser, 200, res);
-  }
+  sendTokenResponse(req.user, 200, res);
 });
 
 // @desc    Get current logged user

@@ -3,6 +3,7 @@ const jwtStrategy = require('passport-jwt').Strategy;
 const localStrategy = require('passport-local').Strategy;
 const googlePlusTokenStrategy = require('passport-google-plus-token');
 const { ExtractJwt } = require('passport-jwt');
+const facebookTokenStrategy = require('passport-facebook-token');
 const User = require('../models/user');
 
 // JSON WEB TOKEN STRATEGY
@@ -25,14 +26,10 @@ passport.use(new jwtStrategy({
 
 // GOOGLE OAUTH STRATEGY
 passport.use('googleToken', new googlePlusTokenStrategy({
-  clientID: '59305806445-6du20q97skt3i8djdhtqgfcgtv185b76.apps.googleusercontent.com',
-  clientSecret: 'wUJ6mBkAwHSJxmdnnUUQAMIC'
+  clientID: process.env.GOOGLE_CLIENT_ID,
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET
 }, async (accessToken, refreshToken, profile, done) => {
   try {
-    /*console.log('accessToken', accessToken);
-    console.log('refreshToken', refreshToken);
-    console.log('profile', profile);*/
-
     // Check whether this current user exists in our DB
     const existingUser = await User.findOne({ "google.id": profile.id });
     if(existingUser){
@@ -54,6 +51,33 @@ passport.use('googleToken', new googlePlusTokenStrategy({
     done(error, false, error.message)
   }
 
+}));
+
+// FACEBOOK OAUTH STRATEGY
+passport.use('facebookToken', new facebookTokenStrategy({
+  clientID: process.env.FACEBOOK_CLIENT_ID,
+  clientSecret: process.env.FACEBOOK_CLIENT_SECRET
+}, async (accessToken, refreshToken, profile, done) => {
+  try {
+    const existingUser = await User.findOne({ "facebook.id": profile.id });
+    if(existingUser) {
+      return done(null, existingUser)
+    }
+
+    const newUser = new User({
+      method: 'facebook',
+      facebook: {
+        id: profile.id,
+        email: profile.emails[0].value,
+        name: profile.displayName
+      }
+    });
+
+    await newUser.save();
+    done(null, newUser);
+  } catch (error) {
+    done(error, false, error.message)
+  }
 }));
 
 // Local strategy
