@@ -6,10 +6,19 @@ const errorResponse = require('../utils/errorResponse');
 // @route POST api/v1/register/
 // @access Public
 exports.registerUser = asyncHandler(async (req, res) => {
+  // Create a new user
+  const newUser = new User({
+    method: 'local',
+    local: {
+      email: req.body.email,
+      password: req.body.password,
+      name: req.body.name
+    }
+  });
 
-  const user = await User.create(req.body);
+  await newUser.save();
 
-  sendTokenResponse(user, 200, res);
+  sendTokenResponse(newUser, 200, res);
 });
 
 // @desc    Login user
@@ -96,7 +105,7 @@ exports.facebookLogin = asyncHandler(async (req, res, next) => {
 // @access  Private
 exports.getMe = asyncHandler(async (req, res) => {
   const user = req.user;
-
+  console.log('Auth');
   res.status(200).json({
     success: true,
     data: user
@@ -142,6 +151,7 @@ exports.updatePassword = asyncHandler(async (req, res, next) => {
 
 // Get token from model, create cookie and send response
 const sendTokenResponse = (user, statusCode, res) => {
+  console.log('Response');
   // Create token
   const token = user.getSignedJwtToken();
 

@@ -1,13 +1,15 @@
 const express = require('express');
 const router = express.Router();
+const passport = require('passport');
 const { registerUser, login, getMe, updateDetails, updatePassword, googleOAuthLogin, facebookLogin } = require('../controllers/auth');
 const { protect } = require('../middleware/auth');
+const passportConf = require('../config/passport');
 
 router.post('/register', registerUser);
 
 router.post('/login', login);
 
-router.get('/getme', protect, getMe);
+router.get('/getme', passport.authenticate('jwt', { session: false }), getMe);
 
 router.put('/updatedetails', protect, updateDetails);
 
