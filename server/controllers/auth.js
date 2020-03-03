@@ -35,7 +35,9 @@ exports.registerUser = asyncHandler(async (req, res, next) => {
 // @route   POST /api/v1/auth/login
 // @access  Public
 exports.login = asyncHandler(async (req, res, next) => {
-  sendTokenResponse(req.user, 200, res);
+  const user = await User.find({"_id": req.user._id});
+
+  sendTokenResponse(user[0], 200, res);
 });
 
 // @desc    Login with Google
@@ -56,7 +58,7 @@ exports.facebookLogin = asyncHandler(async (req, res, next) => {
 // @route   GET /api/v1/me
 // @access  Private
 exports.getMe = asyncHandler(async (req, res) => {
-  const user = req.user;
+  const user = await User.find({ "_id": req.user._id });
 
   res.status(200).json({
     success: true,

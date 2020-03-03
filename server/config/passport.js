@@ -7,7 +7,7 @@ const facebookTokenStrategy = require('passport-facebook-token');
 const User = require('../models/user');
 
 // JSON WEB TOKEN STRATEGY
-passport.use(new jwtStrategy({
+passport.use('jwt', new jwtStrategy({
   jwtFromRequest: ExtractJwt.fromHeader('authorization'),
   secretOrKey: process.env.JWT_SECRET
 }, async (payload, done) => {

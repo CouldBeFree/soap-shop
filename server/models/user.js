@@ -52,9 +52,9 @@ const userSchema = new Schema({
       lowercase: true
     },
   },
-  basket: {
-    type: Array
-  },
+  basket: [
+    {type: mongoose.Schema.Types.ObjectId, ref:'Basket'}
+  ],
   selectedProducts: {
     type: Array
   },
@@ -91,6 +91,11 @@ userSchema.methods.getSignedJwtToken = function(){
 userSchema.methods.matchPassword = async function(password){
   return await bcrypt.compare(password, this.local.password);
 };
+
+// Populate products
+userSchema.pre('find', async function() {
+  this.populate('basket');
+});
 
 // Generate and reset password token
 userSchema.methods.getResetPasswordToken = async function(){

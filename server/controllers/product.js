@@ -1,4 +1,6 @@
 const Product = require('../models/product');
+const User = require('../models/user');
+const Basket = require('../models/basketProducts');
 const asyncHandler = require('../middleware/async');
 const errorResponse = require('../utils/errorResponse');
 
@@ -87,5 +89,52 @@ exports.updateProduct = asyncHandler(async (req, res, next) => {
   res.status(200).json({
     success: true,
     data: product
+  })
+});
+
+// @desc Add product to basket
+// @route POST api/v1/product/basket
+// @access Private
+exports.addProductBasket = asyncHandler(async (req, res, next) => {
+  // Find the user
+  const user = await User.findById(req.body.user);
+
+  // Create new basket
+  const newBasketProduct = new Basket(req.body);
+
+  await newBasketProduct.save();
+
+  user.basket.push(newBasketProduct);
+  await user.save();
+
+  res.status(200).json({
+    success: true
+  })
+});
+
+// @desc Add product to basket
+// @route DELETE api/v1/product/basket
+// @access Private
+exports.removeProductBasket = asyncHandler(async (req, res, next) => {
+  /*// Find the user
+  const user = await User.findById(req.body.user);
+
+  // Create new basket
+  const newBasketProduct = new Basket(req.body);
+
+  await newBasketProduct.save();
+
+  user.basket.push(newBasketProduct);
+  await user.save();*/
+  // Find the user
+  console.log('Olololololo');
+  const user = await User.findById(req.body.user);
+
+  console.log(user);
+  console.log(req.body.user);
+  console.log(req.body.product);
+
+  res.status(200).json({
+    success: true
   })
 });
