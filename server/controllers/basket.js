@@ -48,10 +48,19 @@ exports.removeProductBasket = asyncHandler(async (req, res, next) => {
   const user = await User.findById(req.body.user);
   const basketProduct = await Basket.find({ $and: [{ product: req.body.product }, { "user": req.body.user }]  });
 
-  console.log('product', req.body.product);
-  console.log('user', req.body.user);
-  console.log('basketProduct', basketProduct);
-  console.log('basketProduct length', basketProduct.length);
+  /*const basket = [
+    {
+      _id: '5e6a2c737b2417168ebb3e97'
+    },
+    {
+      _id: '5e6a2c927b2417168ebb3e99'
+    }
+  ]
+
+    const userBasket = ["5e6a2c737b2417168ebb3e97","5e6a2c927b2417168ebb3e99","5e6a2cf17b2417168ebb3e9a","5e6a2d0f7b2417168ebb3e9b","5e6a2d107b2417168ebb3e9c","5e6a2d297b2417168ebb3e9d"]
+  */
+
+  console.log(user.basket);
 
   res.status(200).json({
     success: true
