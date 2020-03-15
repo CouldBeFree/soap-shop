@@ -8,11 +8,7 @@ const basketSchema = new Schema({
   },
   user: {
     type: Object
-  },
-  /*user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  },*/
+  }
 });
 
 // Populate products

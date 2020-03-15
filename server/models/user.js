@@ -53,11 +53,17 @@ const userSchema = new Schema({
     },
   },
   basket: [
-    {type: mongoose.Schema.Types.ObjectId, ref:'Basket'}
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Basket'
+    }
   ],
-  selectedProducts: {
-    type: Array
-  },
+  selectedProducts: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Selected'
+    }
+  ],
   resetPasswordToken: String,
   resetPasswordExpire: Date,
   createdAt: {
@@ -94,7 +100,7 @@ userSchema.methods.matchPassword = async function(password){
 
 // Populate products
 userSchema.pre('find', async function() {
-  this.populate('basket');
+  this.populate('basket').populate('selectedProducts')
 });
 
 // Generate and reset password token

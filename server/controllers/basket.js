@@ -1,11 +1,10 @@
-const Product = require('../models/product');
 const User = require('../models/user');
 const Basket = require('../models/basketProducts');
 const asyncHandler = require('../middleware/async');
 const errorResponse = require('../utils/errorResponse');
 
 // @desc Add product to basket
-// @route POST api/v1/product/basket
+// @route POST api/v1/basket
 // @access Private
 exports.addProductBasket = asyncHandler(async (req, res, next) => {
   // Find the user
@@ -15,13 +14,18 @@ exports.addProductBasket = asyncHandler(async (req, res, next) => {
     return next(new errorResponse('User not found', 404))
   }
 
-  const product = {
+  const product = await Product.findById(req.body.product);
+  if(!product) {
+    return next(new errorResponse('Product not found', 404))
+  }
+
+  const newProduct = {
     user: req.user._id,
     product: req.body.product
   };
 
   // Create new basket
-  const newBasketProduct = new Basket(product);
+  const newBasketProduct = new Basket(newProduct);
 
   await newBasketProduct.save();
 
@@ -38,7 +42,7 @@ exports.addProductBasket = asyncHandler(async (req, res, next) => {
 });
 
 // @desc Add product to basket
-// @route DELETE api/v1/product/basket
+// @route DELETE api/v1/basket
 // @access Private
 exports.removeProductBasket = asyncHandler(async (req, res, next) => {
   // Find the user

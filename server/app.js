@@ -22,12 +22,14 @@ const product = require('./routes/product');
 const user = require('./routes/user');
 const auth = require('./routes/auth');
 const basket = require('./routes/basket');
+const select = require('./routes/selected');
 
 /* Mount routes */
 app.use('/api/v1/product', product);
 app.use('/api/v1/user', user);
 app.use('/api/v1/auth', auth);
 app.use('/api/v1/basket', basket);
+app.use('/api/v1/select', select);
 
 app.use(errorHandler);
 
