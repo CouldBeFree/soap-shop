@@ -51,7 +51,7 @@ exports.removeProductBasket = asyncHandler(async (req, res, next) => {
   const basketProduct = await Basket.find({ $and: [{ "product": req.body.product }, { "user": req.user._id }] });
 
   if(!basketProduct.length) {
-    return next(new errorResponse('Product or user not found', 404))
+    return next(new errorResponse('User with this product not found', 404))
   }
 
   // Remove basket document
