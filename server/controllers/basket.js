@@ -9,21 +9,26 @@ const errorResponse = require('../utils/errorResponse');
 // @access Private
 exports.addProductBasket = asyncHandler(async (req, res, next) => {
   // Find the user
-  const user = await User.findById(req.body.user);
+  const user = await User.findById(req.user._id);
 
   if(!user) {
     return next(new errorResponse('User not found', 404))
   }
 
+  const product = {
+    user: req.user._id,
+    product: req.body.product
+  };
+
   // Create new basket
-  const newBasketProduct = new Basket(req.body);
+  const newBasketProduct = new Basket(product);
 
   await newBasketProduct.save();
 
   user.basket.push(newBasketProduct);
   await user.save();
 
-  const foundUser = await User.find({"_id": req.body.user});
+  const foundUser = await User.find({_id: req.user._id});
   const { basket } = foundUser[0];
 
   res.status(200).json({
@@ -37,9 +42,13 @@ exports.addProductBasket = asyncHandler(async (req, res, next) => {
 // @access Private
 exports.removeProductBasket = asyncHandler(async (req, res, next) => {
   // Find the user
-  const user = await User.findById(req.body.user);
+  const user = await User.findById(req.user._id);
   // Find basket product
-  const basketProduct = await Basket.find({ $and: [{ product: req.body.product }, { "user": req.body.user }]  });
+  const basketProduct = await Basket.find({ $and: [{ "product": req.body.product }, { "user": req.user._id }] });
+
+  if(!basketProduct.length) {
+    return next(new errorResponse('Product or user not found', 404))
+  }
 
   // Remove basket document
   for(const product of basketProduct){
@@ -57,7 +66,7 @@ exports.removeProductBasket = asyncHandler(async (req, res, next) => {
   }
 
   await user.save();
-  const foundUser = await User.find({"_id": req.body.user});
+  const foundUser = await User.find({"_id": req.user._id});
   const { basket } = foundUser[0];
 
   res.status(200).json({
