@@ -16,7 +16,9 @@
               type="text"
               placeholder="Нікнейм"
             >
-            <span class="error-text">{{ errors[0] }}</span>
+            <transition name="fade">
+              <span class="error-text" v-if="errors[0]">{{ errors[0] }}</span>
+            </transition>
           </ValidationProvider>
           <ValidationProvider name="Email" rules="required|email" class="provider" v-slot="{ errors }">
             <input
@@ -25,7 +27,9 @@
               type="email"
               placeholder="Імейл"
             >
-            <span class="error-text">{{ errors[0] }}</span>
+            <transition name="fade">
+              <span class="error-text" v-if="errors[0]">{{ errors[0] }}</span>
+            </transition>
           </ValidationProvider>
           <ValidationProvider class="provider" name="Password" rules="required" v-slot="{ errors }">
             <input
@@ -33,14 +37,18 @@
               v-model="password"
               type="password" placeholder="Пароль"
             >
-            <span class="error-text">{{ errors[0] }}</span>
+            <transition name="fade">
+              <span class="error-text" v-if="errors[0]">{{ errors[0] }}</span>
+            </transition>
           </ValidationProvider>
           <button type="submit" class="button main-button">Зареєструватись</button>
           <nuxt-link :to="'/auth/login'" class="button secondary-button text-center">Логін</nuxt-link>
         </form>
-        <div class="err" v-if="error">
-          <span>{{error}}</span>
-        </div>
+        <transition name="fade">
+          <div class="err" v-if="error">
+            <span>{{error}}</span>
+          </div>
+        </transition>
       </ValidationObserver>
       <transition name="fade">
         <register-success
@@ -58,7 +66,7 @@
 </template>
 
 <script>
-  import { mapActions, mapState } from 'vuex'
+  import { mapActions, mapState, mapMutations } from 'vuex'
   import registerSuccess from "../../components/modal/registerSuccess";
 
   export default {
@@ -83,12 +91,14 @@
           email: this.email,
           password: this.password
         };
+        this.setSubmitType('register');
         this.isLoading = true;
         await this.registerUser(user);
         this.isLoading = false;
         this.isModalOpen = true;
       },
-      ...mapActions('user', ['registerUser'])
+      ...mapActions('user', ['registerUser']),
+      ...mapMutations('user', ['setSubmitType'])
     },
     computed: {
       ...mapState('user', {

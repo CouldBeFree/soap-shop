@@ -10,10 +10,15 @@ const crypto = require('crypto');
 exports.registerUser = asyncHandler(async (req, res, next) => {
   const { email, password, name } = req.body;
 
-  //Check if user exists
-  const isUserExists = await User.findOne({ "local.email": email });
-  if(isUserExists) {
+  //Check if user exists by email or nickname
+  const isUserEmailExists = await User.findOne({ "local.email": email });
+  if(isUserEmailExists) {
      return next(new errorResponse(`User with email ${email} already exists`, 200))
+  }
+
+  const isUserNicknameExists = await User.findOne({ "local.name": name });
+  if(isUserNicknameExists) {
+     return next(new errorResponse(`User with nick ${name} already exists`, 200))
   }
 
   // Create a new user

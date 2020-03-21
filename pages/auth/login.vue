@@ -16,7 +16,9 @@
               type="email"
               placeholder="Імейл"
             >
-            <span class="error-text">{{ errors[0] }}</span>
+            <transition name="fade">
+              <span class="error-text" v-if="errors[0]">{{ errors[0] }}</span>
+            </transition>
           </ValidationProvider>
           <ValidationProvider class="provider" name="Password" rules="required" v-slot="{ errors }">
             <input
@@ -25,7 +27,9 @@
               type="password"
               placeholder="Пароль"
             >
-            <span class="error-text">{{ errors[0] }}</span>
+            <transition name="fade">
+              <span class="error-text" v-if="errors[0]">{{ errors[0] }}</span>
+            </transition>
           </ValidationProvider>
         <button type="submit" class="button main-button">Логін</button>
         <nuxt-link :to="'/auth/forgot-password'" class="forgot-password">Забув пароль</nuxt-link>
@@ -47,7 +51,6 @@
           @login="getUserData"
         >
         </facebook-login>
-        <facebook-auth></facebook-auth>
       </no-ssr>
     </div>
   </div>
@@ -56,6 +59,7 @@
 <script>
   import GoogleLogin from 'vue-google-login';
   import facebookLogin from 'facebook-login-vuejs';
+  import { mapActions, mapState, mapMutations } from 'vuex';
 
   export default {
     name: "login",
@@ -83,9 +87,30 @@
       GoogleLogin,
       facebookLogin
     },
+    computed: {
+      ...mapState('user', {
+        error: state => state.error,
+        user: state => state.user
+      }),
+      isRegistered() {
+        return Object.keys(this.user).length !== 0
+      }
+    },
     methods: {
-      onSubmit() {
-        //this.isLoading = true;
+      ...mapActions('user', ['loginUser']),
+      ...mapMutations('user', ['setSubmitType']),
+      async onSubmit() {
+        const user = {
+          email: this.email,
+          password: this.password
+        };
+        this.setSubmitType('login');
+        this.isLoading = true;
+        await this.loginUser(user);
+        this.isLoading = false;
+        if(this.isRegistered){
+          this.$router.push('/')
+        }
       },
       onFacebookAuth() {
         console.dir(this.$refs.facebook);
@@ -116,6 +141,13 @@
 </script>
 
 <style scoped lang="scss">
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
+
   input {
     padding: 15px;
     color: #666;

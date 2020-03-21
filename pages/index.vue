@@ -49,6 +49,7 @@ import product from "../components/product";
 import { mapState, mapMutations } from 'vuex';
 
 export default {
+  transition: 'bounce',
   data() {
     return {
       cartProducts: [],

@@ -18,7 +18,7 @@ export default {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#fff' },
+  loading: { color: '#0579FC' },
   /*
   ** Global CSSv-scroll-lock="opened"
   */

@@ -97,6 +97,15 @@ button:focus {
   background: #23272b;
 }
 
+/* Route animation */
+
+.page-enter-active, .page-leave-active {
+  transition: opacity .25s
+}
+.page-enter, .page-leave-active {
+  opacity: 0
+}
+
 /* Flex */
 
 .flex {

@@ -2,7 +2,8 @@ export const state = () => ({
   user: {},
   error: '',
   token: '',
-  cart: []
+  cart: [],
+  submitType: 'register'
 });
 
 export const mutations = {
@@ -17,15 +18,18 @@ export const mutations = {
   },
   setToken(state, token) {
     state.token = token
+  },
+  setSubmitType(state, type) {
+    state.submit = type;
   }
 };
 
 export const actions = {
-  async registerUser({state, commit}, payload){
+  async postUserData({ state, commit }, payload){
       commit('setError', '');
       commit('setUser', {});
       try {
-        const { data } = await this.$axios.post('auth/register', payload);
+        const { data } = await this.$axios.post(`auth/${state.submitType}`, payload);
         if(data.success){
           commit('setUser', data.user);
           commit('setToken', data.token);
