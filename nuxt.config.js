@@ -1,4 +1,3 @@
-
 export default {
   mode: 'universal',
   /*
@@ -48,8 +47,12 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
-    '@nuxtjs/style-resources'
+    '@nuxtjs/style-resources',
+    '@nuxtjs/axios'
   ],
+  axios: {
+    baseURL: 'http://localhost:5050/api/v1/'
+  },
   styleResources: {
     scss: [
       'assets/scss/variables.scss',

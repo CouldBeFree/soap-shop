@@ -67,7 +67,7 @@ exports.removeSelectedProduct = asyncHandler(async (req, res, next) => {
     return el.toString() === selectedProduct[0]._id.toString()
   });
   if(index > -1){
-    user.selectedProducts.splice(index, 1)
+    user.selectedProducts.splice(index, 1);
   }
 
   await user.save();

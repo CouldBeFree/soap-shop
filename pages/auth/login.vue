@@ -33,24 +33,23 @@
       </form>
     </ValidationObserver>
     <div class="social-login">
-      <!--<button>
+      <button @click="onFacebookAuth">
         <span class="icon-facebook-circular-logo"></span>
-      </button>-->
+      </button>
       <no-ssr>
         <GoogleLogin :params="params" :onSuccess="onSuccess" :onFailure="onFailure">
           <span class="icon-google-plus"></span>
         </GoogleLogin>
         <facebook-login
           class="button"
+          ref="facebook"
           appId="198282397928750"
           @login="getUserData"
         >
         </facebook-login>
+        <facebook-auth></facebook-auth>
       </no-ssr>
     </div>
-    <h4>Name {{name}}</h4>
-    <h4>Id {{personalID}}</h4>
-    <h4>Email {{socialEmail}}</h4>
   </div>
 </template>
 
@@ -87,6 +86,9 @@
     methods: {
       onSubmit() {
         //this.isLoading = true;
+      },
+      onFacebookAuth() {
+        console.dir(this.$refs.facebook);
       },
       onSuccess(googleUser) {
         const profile = googleUser.getBasicProfile();

@@ -38,31 +38,103 @@
           <button type="submit" class="button main-button">Зареєструватись</button>
           <nuxt-link :to="'/auth/login'" class="button secondary-button text-center">Логін</nuxt-link>
         </form>
+        <div class="err" v-if="error">
+          <span>{{error}}</span>
+        </div>
       </ValidationObserver>
+      <transition name="fade">
+        <register-success
+          v-if="this.isRegistered && isModalOpen && !error"
+          @close="isModalOpen = false"
+        >
+          <div class="flex flex-column justify-around wrap align-center">
+            <h2 class="success-headline flex justify-center">Реєстрація успішна</h2>
+            <p class="link-wrap">Перейти на <nuxt-link to="/" class="link">головну</nuxt-link></p>
+            <p class="link-wrap">Перейти до <nuxt-link to="/" class="link">покупок</nuxt-link></p>
+          </div>
+        </register-success>
+      </transition>
     </div>
 </template>
 
 <script>
+  import { mapActions, mapState } from 'vuex'
+  import registerSuccess from "../../components/modal/registerSuccess";
+
   export default {
     name: "register",
+    components: {
+      registerSuccess
+    },
     data() {
       return {
         nickname: '',
         email: '',
         password: '',
         isLoading: false,
-        fullPage: true
+        fullPage: true,
+        isModalOpen: false
       }
     },
     methods: {
-      onSubmit() {
+      async onSubmit() {
+        const user = {
+          name: this.nickname,
+          email: this.email,
+          password: this.password
+        };
         this.isLoading = true;
+        await this.registerUser(user);
+        this.isLoading = false;
+        this.isModalOpen = true;
+      },
+      ...mapActions('user', ['registerUser'])
+    },
+    computed: {
+      ...mapState('user', {
+        error: state => state.error,
+        user: state => state.user
+      }),
+      isRegistered() {
+        return Object.keys(this.user).length !== 0
       }
+    },
+    destroyed() {
+      this.isModalOpen = false;
     }
   }
 </script>
 
 <style scoped lang="scss">
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
+
+  .link {
+    color: $main-color;
+  }
+
+  .link-wrap {
+    font-size: 16px;
+  }
+
+  .wrap {
+    height: 100%;
+  }
+
+  .err {
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+
+    span {
+      color: $error;
+    }
+  }
+
   h1 {
     font-size: 30px;
     margin-bottom: 10px;
