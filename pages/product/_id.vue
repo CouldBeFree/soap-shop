@@ -1,14 +1,13 @@
 <template>
     <div class="container-fluid">
       <no-ssr>
-        <loading
-          :active.sync="isLoading"
+        <!--<loading
+          :active.sync="false"
           :is-full-page="true"
-        ></loading>
+        ></loading>-->
       </no-ssr>
-      {{product}}
-      <h1>Product name {{product.name}}</h1>
-      <h4>Price {{product.price}} uah</h4>
+      <h1 v-if="product && product.name">Product name {{product.name}}</h1>
+      <h4 v-if="product && product.price">Price {{product.price}} uah</h4>
     </div>
 </template>
 
@@ -19,20 +18,22 @@
     name: "product",
     data: function() {
       return {
-        isLoading: false
+        product: {}
       }
     },
-    async mounted() {
-      this.isLoading = true;
-      await this.getProduct(this.$route.params.id);
-      this.isLoading = false;
+    async asyncData({ params, $axios, store }) {
+      console.log('$store', store);
+      const { data } = await $axios.$get(`/product/${params.id}`);
+      return {
+        product: data
+      }
     },
     methods: {
       ...mapActions('products', ['getProduct'])
     },
     computed: {
       ...mapState('products', {
-        product: state => state.product
+        //product: state => state.product
       })
     }
   }
