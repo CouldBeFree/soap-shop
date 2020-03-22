@@ -20,7 +20,7 @@ export const mutations = {
     state.token = token
   },
   setSubmitType(state, type) {
-    state.submit = type;
+    state.submitType = type;
   }
 };
 

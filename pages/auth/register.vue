@@ -93,11 +93,11 @@
         };
         this.setSubmitType('register');
         this.isLoading = true;
-        await this.registerUser(user);
+        await this.postUserData(user);
         this.isLoading = false;
         this.isModalOpen = true;
       },
-      ...mapActions('user', ['registerUser']),
+      ...mapActions('user', ['postUserData']),
       ...mapMutations('user', ['setSubmitType'])
     },
     computed: {

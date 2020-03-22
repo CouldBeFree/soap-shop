@@ -97,7 +97,7 @@
       }
     },
     methods: {
-      ...mapActions('user', ['loginUser']),
+      ...mapActions('user', ['postUserData']),
       ...mapMutations('user', ['setSubmitType']),
       async onSubmit() {
         const user = {
@@ -106,7 +106,7 @@
         };
         this.setSubmitType('login');
         this.isLoading = true;
-        await this.loginUser(user);
+        await this.postUserData(user);
         this.isLoading = false;
         if(this.isRegistered){
           this.$router.push('/')

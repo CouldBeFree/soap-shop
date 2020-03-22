@@ -9,7 +9,7 @@
         <nuxt-link :to="'/auth/login'">Вхід</nuxt-link>
       </li>
       <li>
-        <nuxt-link :to="'/'">Мій обліковий запис</nuxt-link>
+        <nuxt-link :to="'/auth/me'">Мій обліковий запис</nuxt-link>
       </li>
     </ul>
     <div class="phone-holder">
