@@ -9,28 +9,28 @@
     </no-ssr>
     <ValidationObserver v-slot="{ handleSubmit }">
       <form @submit.prevent="handleSubmit(onSubmit)" class="flex flex-column">
-          <ValidationProvider name="Email" rules="required|email" class="provider" v-slot="{ errors }">
-            <input
-              :class="{error: errors[0]}"
-              v-model="email"
-              type="email"
-              placeholder="Імейл"
-            >
-            <transition name="fade">
-              <span class="error-text" v-if="errors[0]">{{ errors[0] }}</span>
-            </transition>
-          </ValidationProvider>
-          <ValidationProvider class="provider" name="Password" rules="required" v-slot="{ errors }">
-            <input
-              :class="{error: errors[0]}"
-              v-model="password"
-              type="password"
-              placeholder="Пароль"
-            >
-            <transition name="fade">
-              <span class="error-text" v-if="errors[0]">{{ errors[0] }}</span>
-            </transition>
-          </ValidationProvider>
+        <ValidationProvider name="Email" rules="required|email" class="provider" v-slot="{ errors }">
+          <input
+            :class="{error: errors[0]}"
+            v-model="email"
+            type="email"
+            placeholder="Імейл"
+          >
+          <transition name="fade">
+            <span class="error-text" v-if="errors[0]">{{ errors[0] }}</span>
+          </transition>
+        </ValidationProvider>
+        <ValidationProvider class="provider" name="Password" rules="required" v-slot="{ errors }">
+          <input
+            :class="{error: errors[0]}"
+            v-model="password"
+            type="password"
+            placeholder="Пароль"
+          >
+          <transition name="fade">
+            <span class="error-text" v-if="errors[0]">{{ errors[0] }}</span>
+          </transition>
+        </ValidationProvider>
         <button type="submit" class="button main-button">Логін</button>
         <nuxt-link :to="'/auth/forgot-password'" class="forgot-password">Забув пароль</nuxt-link>
         <nuxt-link :to="'/auth/register'" class="button secondary-button text-center">Немає акаунту</nuxt-link>
@@ -149,6 +149,12 @@
 </script>
 
 <style scoped lang="scss">
+  .top {
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
   .fade-enter-active, .fade-leave-active {
     transition: opacity .5s;
   }

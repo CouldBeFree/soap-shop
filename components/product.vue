@@ -5,7 +5,7 @@
         <img v-lazy="product.image" :alt="product.name">
       </div>
     </nuxt-link>
-    <h5 class="sub-headline"><nuxt-link :to="{name: `category-${product.category}`}">{{product.category}}</nuxt-link></h5>
+    <h5 class="sub-headline"><nuxt-link :to="`category/${product.slug}`">{{product.category}}</nuxt-link></h5>
     <h5 class="headline"><nuxt-link :to="{name: 'product-id', params: {id: product.id}}">{{product.name}}</nuxt-link></h5>
     <div class="flex justify-between">
       <span class="price"><span class="uah-icon">₴</span>{{product.price}}</span>

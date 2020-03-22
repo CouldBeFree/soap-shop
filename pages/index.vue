@@ -1,23 +1,25 @@
 <template>
   <div>
-    <is-not-signed-in
-      v-if="isOpen"
-      @close="isOpen = false"
-      v-scroll-lock="isOpen"
-    >
-      <template #title>
-        <h4 class="modal-title text-center">{{title}}</h4>
-      </template>
-    </is-not-signed-in>
-    <cartModal
-      v-if="cartModalOpen"
-      v-scroll-lock="cartModalOpen"
-      @close="cartModalOpen = false"
-    >
-      <template #title>
-        <h4 class="modal-title text-center">{{title}} успішно додано до корзини</h4>
-      </template>
-    </cartModal>
+    <transition name="fade">
+      <is-not-signed-in
+        v-if="isOpen"
+        @close="isOpen = false"
+        class="align-center flex justify-center"
+      >
+        <template #title>
+          <h4 class="modal-title text-center">{{title}}</h4>
+        </template>
+      </is-not-signed-in>
+      <cartModal
+        class="align-center flex justify-center"
+        v-if="cartModalOpen"
+        @close="cartModalOpen = false"
+      >
+        <template #title>
+          <h4 class="modal-title text-center">{{title}} успішно додано до корзини</h4>
+        </template>
+      </cartModal>
+    </transition>
     <no-ssr>
       <loading
         :active.sync="isLoading"
@@ -119,5 +121,13 @@ export default {
     padding: 30px 20px;
     font-size: 20px;
     font-weight: 400;
+  }
+
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
   }
 </style>
