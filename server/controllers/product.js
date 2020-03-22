@@ -91,3 +91,31 @@ exports.updateProduct = asyncHandler(async (req, res, next) => {
     data: product
   })
 });
+
+// @desc Get products
+// @route GET api/v1/product
+// @access Public
+exports.getProducts = asyncHandler(async (req, res, next) => {
+  const products = await Product.find({});
+
+  res.status(200).json({
+    success: true,
+    data: products
+  })
+});
+
+// @desc Get product
+// @route GET api/v1/product/:id
+// @access Public
+exports.getProduct = asyncHandler(async (req, res, next) => {
+  const product = await Product.findById(req.params.id);
+
+  if(!product) {
+    return next(new errorResponse(`No product with the id of ${req.params.id}`), 200)
+  }
+
+  res.status(200).json({
+    success: true,
+    data: product
+  })
+});

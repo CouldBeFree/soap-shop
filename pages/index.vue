@@ -48,7 +48,7 @@ import isNotSignedIn from "../components/modal/isNotSignedIn";
 import cartModal from "../components/modal/cartModal";
 import slider from "~/components/slider";
 import product from "../components/product";
-import { mapState, mapMutations } from 'vuex';
+import { mapState, mapMutations, mapActions } from 'vuex';
 
 export default {
   transition: 'bounce',
@@ -81,6 +81,7 @@ export default {
   },
   methods: {
     ...mapMutations('user', ['setProducts']),
+    ...mapActions('products', ['getProducts']),
     onCartSubmit(item) {
       if (this.isLogged) {
         this.isLoading = true;
@@ -100,7 +101,8 @@ export default {
       }
     }
   },
-  mounted() {
+  async mounted() {
+    await this.getProducts();
     let cartProducts = localStorage.getItem('cart');
     cartProducts = cartProducts ? JSON.parse(cartProducts) : [];
     if (cartProducts.length) {

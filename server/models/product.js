@@ -26,6 +26,9 @@ const ProductSchema = new Schema({
   thumb: {
     url: String
   },
+  slug: {
+    type: String
+  },
   images: [{url: String}]
 });
 

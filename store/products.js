@@ -1,6 +1,7 @@
 export const state = () => ({
+  error: '',
   products: [
-    {
+    /*{
       id: 1,
       image: 'https://placeimg.com/300/300/tech',
       category: 'baby-soap',
@@ -63,16 +64,42 @@ export const state = () => ({
       name: 'Bouquet soap',
       price: 300,
       slug: 'bouquets'
-    }
-  ]
+    }*/
+  ],
+  product: {}
 });
 
-export const actions = {
-
+export const mutations = {
+  setError(state, error) {
+    state.error = error
+  },
+  setProducts(state, products) {
+    state.products = products
+  },
+  setProduct(state, product) {
+    state.product = product
+  }
 };
 
-export const mutations = {
-
+export const actions = {
+  async getProducts({ commit }) {
+    try {
+      commit('setError', '');
+      const { data } = await this.$axios.get('/product');
+      commit('setProducts', data.data);
+    } catch ({ message }) {
+      commit('setError', message);
+    }
+  },
+  async getProduct({ commit }, id) {
+    try {
+      commit('setError', '');
+      const { data } = await this.$axios.get(`/product/${id}`);
+      commit('setProduct', data.data);
+    } catch({ message }) {
+      commit('setError', message);
+    }
+  }
 };
 
 export const getters = {

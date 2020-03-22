@@ -1,12 +1,13 @@
 <template>
   <div>
-    <nuxt-link :to="{ name: 'product-id', params: {id: product.id} }">
+    <nuxt-link :to="{ name: 'product-id', params: {id: product._id} }">
       <div class="image-holder">
-        <img v-lazy="product.image" :alt="product.name">
+<!--        <img v-lazy="product.image" :alt="product.name">-->
+        <img src="https://placeimg.com/300/300/tech" :alt="product.name">
       </div>
     </nuxt-link>
     <h5 class="sub-headline"><nuxt-link :to="`category/${product.slug}`">{{product.category}}</nuxt-link></h5>
-    <h5 class="headline"><nuxt-link :to="{name: 'product-id', params: {id: product.id}}">{{product.name}}</nuxt-link></h5>
+    <h5 class="headline"><nuxt-link :to="{name: 'product-id', params: {id: product._id}}">{{product.name}}</nuxt-link></h5>
     <div class="flex justify-between">
       <span class="price"><span class="uah-icon">₴</span>{{product.price}}</span>
       <div class="flex align-center">
