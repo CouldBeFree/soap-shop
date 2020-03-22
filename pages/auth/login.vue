@@ -36,6 +36,11 @@
         <nuxt-link :to="'/auth/register'" class="button secondary-button text-center">Немає акаунту</nuxt-link>
       </form>
     </ValidationObserver>
+    <transition name="fade">
+      <div class="err" v-if="error">
+        <span>Не правильний логін або імейл</span>
+      </div>
+    </transition>
     <div class="social-login">
       <button @click="onFacebookAuth">
         <span class="icon-facebook-circular-logo"></span>
@@ -96,9 +101,12 @@
         return Object.keys(this.user).length !== 0
       }
     },
+    destroyed() {
+      this.setError('');
+    },
     methods: {
       ...mapActions('user', ['postUserData']),
-      ...mapMutations('user', ['setSubmitType']),
+      ...mapMutations('user', ['setSubmitType', 'setError']),
       async onSubmit() {
         const user = {
           email: this.email,
@@ -144,6 +152,7 @@
   .fade-enter-active, .fade-leave-active {
     transition: opacity .5s;
   }
+
   .fade-enter, .fade-leave-to {
     opacity: 0;
   }
@@ -239,5 +248,15 @@
   h1 {
     font-size: 30px;
     margin-bottom: 10px;
+  }
+
+  .err {
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+
+    span {
+      color: $error;
+    }
   }
 </style>

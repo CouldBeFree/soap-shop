@@ -17,9 +17,14 @@
             <span>{{selectedProducts.length}} товарів</span>
           </nuxt-link>
         </li>
-        <li>
+        <li v-if="!isUser">
           <nuxt-link :to="'/auth/login'">
             <span class="icon-login"></span>
+          </nuxt-link>
+        </li>
+        <li v-else>
+          <nuxt-link :to="'/me'">
+            <span class="icon-user"></span>
           </nuxt-link>
         </li>
         <li>
@@ -59,14 +64,18 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+  import { mapState } from 'vuex';
 
   export default {
     name: "navbar",
     computed: {
       ...mapState('user', {
-        selectedProducts: state => state.cart
-      })
+        selectedProducts: state => state.cart,
+        user: state => state.user
+      }),
+      isUser() {
+        return Object.keys(this.user).length !== 0;
+      }
     }
   }
 </script>
@@ -111,7 +120,7 @@
           font-size: 24px;
         }
 
-        .icon-login, .icon-heart {
+        .icon-login, .icon-heart, .icon-user {
           font-size: 20px;
         }
 

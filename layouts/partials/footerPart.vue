@@ -5,11 +5,14 @@
       Ми запобігаємо забрудненню та зменшуємо відходи.
     </p>
     <ul class="footer-nav flex">
-      <li>
+      <li v-if="!isUser">
         <nuxt-link :to="'/auth/login'">Вхід</nuxt-link>
       </li>
+      <li v-else>
+        <a href="#" @click.prevent="logOut" class="log-out">Вийти</a>
+      </li>
       <li>
-        <nuxt-link :to="'/auth/me'">Мій обліковий запис</nuxt-link>
+        <nuxt-link :to="'/me'">Мій обліковий запис</nuxt-link>
       </li>
     </ul>
     <div class="phone-holder">
@@ -34,8 +37,24 @@
 </template>
 
 <script>
+  import { mapState, mapMutations } from 'vuex';
+
   export default {
-    name: "footerPart"
+    name: "footerPart",
+    computed: {
+      ...mapState('user', {
+        user: state => state.user
+      }),
+      isUser() {
+        return Object.keys(this.user).length !== 0;
+      }
+    },
+    methods: {
+      ...mapMutations('user', ['setUser']),
+      logOut() {
+        this.setUser({});
+      }
+    }
   }
 </script>
 
@@ -45,8 +64,16 @@
     color: #ffffff;
     padding: 45px 0;
 
+    @media (max-width: 1400px) {
+      padding: 20px 0;
+    }
+
     .phone-holder {
       margin: 20px 0;
+
+      @media (max-width: 1400px) {
+        margin: 10px 0;
+      }
 
       a {
         &:hover {
@@ -55,9 +82,13 @@
       }
     }
 
-    .footer-nav {
+    &-nav {
       padding-top: 30px;
       font-size: 15px;
+
+      @media (max-width: 1400px) {
+        padding-top: 15px;
+      }
 
       li {
         margin-right: 20px;

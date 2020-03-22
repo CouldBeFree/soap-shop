@@ -50,18 +50,6 @@
           </div>
         </transition>
       </ValidationObserver>
-      <transition name="fade">
-        <register-success
-          v-if="this.isRegistered && isModalOpen && !error"
-          @close="isModalOpen = false"
-        >
-          <div class="flex flex-column justify-around wrap align-center">
-            <h2 class="success-headline flex justify-center">Реєстрація успішна</h2>
-            <p class="link-wrap">Перейти на <nuxt-link to="/" class="link">головну</nuxt-link></p>
-            <p class="link-wrap">Перейти до <nuxt-link to="/" class="link">покупок</nuxt-link></p>
-          </div>
-        </register-success>
-      </transition>
     </div>
 </template>
 
@@ -80,8 +68,7 @@
         email: '',
         password: '',
         isLoading: false,
-        fullPage: true,
-        isModalOpen: false
+        fullPage: true
       }
     },
     methods: {
@@ -91,14 +78,17 @@
           email: this.email,
           password: this.password
         };
+
         this.setSubmitType('register');
         this.isLoading = true;
         await this.postUserData(user);
+        if(this.isRegistered){
+          this.$router.push('/');
+        }
         this.isLoading = false;
-        this.isModalOpen = true;
       },
       ...mapActions('user', ['postUserData']),
-      ...mapMutations('user', ['setSubmitType'])
+      ...mapMutations('user', ['setSubmitType', 'setError'])
     },
     computed: {
       ...mapState('user', {
@@ -109,9 +99,6 @@
         return Object.keys(this.user).length !== 0
       }
     },
-    destroyed() {
-      this.isModalOpen = false;
-    }
   }
 </script>
 
