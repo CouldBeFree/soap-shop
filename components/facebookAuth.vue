@@ -13,7 +13,7 @@
           appId      : 198282397928750,
           cookie     : true,
           xfbml      : true,
-          version    : '2.8'
+          version    : '6.0'
         });
 
         FB.getLoginStatus(function(response) {

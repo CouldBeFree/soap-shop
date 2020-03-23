@@ -1,3 +1,6 @@
+import path from 'path';
+import fs from 'fs';
+
 export default {
   mode: 'universal',
   /*
@@ -38,6 +41,12 @@ export default {
     { src: '~plugins/preloader.js', ssr: false },
     { src: '~plugins/scrollLock.js', ssr: false }
   ],
+  /*server: {
+    https: {
+      key: fs.readFileSync(path.resolve(__dirname, 'server.key')),
+      cert: fs.readFileSync(path.resolve(__dirname, 'server.crt'))
+    }
+  },*/
   /*
   ** Nuxt.js dev-modules
   */
