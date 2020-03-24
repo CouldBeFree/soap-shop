@@ -56,15 +56,18 @@
           @login="getUserData"
         >
         </facebook-login>
+        <facebook-auth></facebook-auth>
       </no-ssr>
     </div>
   </div>
 </template>
 
 <script>
+  import { mapActions, mapState, mapMutations } from 'vuex';
+
   import GoogleLogin from 'vue-google-login';
   import facebookLogin from 'facebook-login-vuejs';
-  import { mapActions, mapState, mapMutations } from 'vuex';
+  import facebookAuth from "../../components/facebookAuth";
 
   export default {
     name: "login",
@@ -90,7 +93,8 @@
     },
     components: {
       GoogleLogin,
-      facebookLogin
+      facebookLogin,
+      facebookAuth
     },
     computed: {
       ...mapState('user', {

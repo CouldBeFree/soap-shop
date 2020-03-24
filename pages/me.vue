@@ -1,6 +1,5 @@
 <template>
   <div class="container-fluid wrapper center"
-       :style="{'background-image': 'url(' + require('~/assets/images/hands.jpg') + ')'}"
        :class="{ 'flex-column': isUser }"
   >
     <div v-if="user && user.local" class="text-center">
@@ -18,6 +17,7 @@
 
 <script>
   import { mapState, mapMutations } from 'vuex';
+  // :style="{'background-image': 'url(' + require('~/assets/images/hands.jpg') + ')'}"
 
   export default {
     name: "me",
