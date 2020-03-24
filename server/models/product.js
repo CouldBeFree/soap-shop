@@ -16,7 +16,8 @@ const ProductSchema = new Schema({
       'man',
       'baby-soap',
       'bouquets',
-      'kits'
+      'kits',
+      'natural'
     ]
   },
   price: {
