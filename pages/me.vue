@@ -2,7 +2,6 @@
   <div class="container-fluid wrapper center"
        :class="{ 'flex-column': isUser }"
   >
-    <h2>Page</h2>
     <div v-if="user && user.local" class="text-center">
       <h1>Hello {{user.local.name}}</h1>
       <h2>Email {{user.local.email}}</h2>

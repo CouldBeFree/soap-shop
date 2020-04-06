@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>Commit</h1>
     <transition name="fade">
       <is-not-signed-in
         v-if="isOpen"
