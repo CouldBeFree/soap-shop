@@ -39,7 +39,7 @@ app.use(errorHandler);
 mongoose.connect('mongodb://localhost:27017/soap', {
   useNewUrlParser: true,
   useCreateIndex: true,
-  useFindAndModify: true,
+  useFindAndModify: false,
   useUnifiedTopology: true
 });
 

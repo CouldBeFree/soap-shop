@@ -7,11 +7,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Images
-server/uploads
-uploads
-*/*uploads
-
 # Runtime data
 pids
 *.pid

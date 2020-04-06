@@ -55,6 +55,7 @@ exports.removeProduct = asyncHandler(async (req, res, next) => {
 // @access Private
 exports.updateProduct = asyncHandler(async (req, res, next) => {
   const images = [];
+  console.log(req.params.id);
   const files = req.files['images'];
   if(files && files.length){
     for(const image of files){
@@ -62,6 +63,8 @@ exports.updateProduct = asyncHandler(async (req, res, next) => {
       images.push(imageObj);
     }
   }
+
+  console.log('req.files', req.files);
 
   const newProduct = {
     name: req.body.name,
@@ -75,19 +78,27 @@ exports.updateProduct = asyncHandler(async (req, res, next) => {
 
   let product = await Product.findById(req.params.id);
 
+  console.log('product', product);
+
   if(!product) {
     return next(new errorResponse(`No product with the id of ${req.params.id}`), 404)
   }
 
-  product = await Product.findOneAndUpdate(req.params.id, newProduct, {
-    new: true,
+  console.log('newProduct', newProduct);
+
+  /*product = await Product.findOneAndUpdate(req.params.id, newProduct, {
     runValidators: true
+  });*/
+
+  Product.findOneAndUpdate(req.params.id, newProduct, {upsert: true}, function(err, doc) {
+    if (err) return res.send(500, {error: err});
+    return res.send('Succesfully saved.');
   });
 
-  res.status(200).json({
+  /*res.status(200).json({
     success: true,
     data: product
-  })
+  })*/
 });
 
 // @desc Get products
