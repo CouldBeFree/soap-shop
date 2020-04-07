@@ -54,23 +54,31 @@ exports.removeProduct = asyncHandler(async (req, res, next) => {
 // @route PUT api/v1/product/:id
 // @access Private
 exports.updateProduct = asyncHandler(async (req, res, next) => {
-  const images = [];
+  let images = [];
+  let thumb = {};
   const files = req.files['images'];
   if(files && files.length){
     for(const image of files){
       const imageObj = { url: image.path };
       images.push(imageObj);
     }
+  } else {
+    console.log('req.body.images\n', req.body.images);
+    images = req.body.images
+  }
+
+  if(!req.files['thumb']) {
+    thumb.url = req.body.thumb
+  } else {
+    thumb.url = req.files['thumb'][0].path
   }
 
   const newProduct = {
     name: req.body.name,
     category: req.body.category,
     price: req.body.price,
-    thumb: {
-      url: req.files['thumb'] ? req.files['thumb'][0].path : ''
-    },
-    images: images
+    thumb,
+    images
   };
 
   let product = await Product.findById(req.params.id);
