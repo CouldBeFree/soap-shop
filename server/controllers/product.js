@@ -55,9 +55,12 @@ exports.removeProduct = asyncHandler(async (req, res, next) => {
 // @access Private
 exports.updateProduct = asyncHandler(async (req, res, next) => {
   let product = await Product.findById(req.params.id);
+  console.info('product', product);
+  console.log('body', req.body);
   let images = [];
   let thumb = {};
   const files = req.files['images'];
+  console.log('images', files);
   if(files && files.length){
     for(const image of files){
       const imageObj = { url: image.path };
