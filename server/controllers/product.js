@@ -54,6 +54,7 @@ exports.removeProduct = asyncHandler(async (req, res, next) => {
 // @route PUT api/v1/product/:id
 // @access Private
 exports.updateProduct = asyncHandler(async (req, res, next) => {
+  let product = await Product.findById(req.params.id);
   let images = [];
   let thumb = {};
   const files = req.files['images'];
@@ -63,12 +64,11 @@ exports.updateProduct = asyncHandler(async (req, res, next) => {
       images.push(imageObj);
     }
   } else {
-    console.log('req.body.images\n', req.body.images);
     images = req.body.images
   }
 
   if(!req.files['thumb']) {
-    thumb.url = req.body.thumb
+    thumb.url = product.thumb.url
   } else {
     thumb.url = req.files['thumb'][0].path
   }
@@ -80,8 +80,6 @@ exports.updateProduct = asyncHandler(async (req, res, next) => {
     thumb,
     images
   };
-
-  let product = await Product.findById(req.params.id);
 
   if(!product) {
     return next(new errorResponse(`No product with the id of ${req.params.id}`), 404)
