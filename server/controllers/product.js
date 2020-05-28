@@ -1,6 +1,7 @@
 const Product = require('../models/product');
 const asyncHandler = require('../middleware/async');
 const errorResponse = require('../utils/errorResponse');
+const util = require('util');
 
 // @desc Add a product
 // @route POST api/v1/product/
@@ -55,19 +56,26 @@ exports.removeProduct = asyncHandler(async (req, res, next) => {
 // @access Private
 exports.updateProduct = asyncHandler(async (req, res, next) => {
   let product = await Product.findById(req.params.id);
-  console.info('product', product);
-  console.log('body', req.body);
   let images = [];
   let thumb = {};
   const files = req.files['images'];
-  console.log('images', files);
   if(files && files.length){
     for(const image of files){
       const imageObj = { url: image.path };
       images.push(imageObj);
     }
-  } else {
-    images = req.body.images
+  }
+
+  const imagesFromClient = req.body.images;
+  const imagesFromDB = product.images;
+  if(imagesFromClient && Array.isArray(imagesFromClient)) {
+    for(const image of imagesFromClient) {
+      images.push(JSON.parse(image));
+    }
+  }
+
+  if(imagesFromClient && imagesFromClient.length === imagesFromDB && imagesFromDB.length) {
+    images = images.concat(imagesFromDB);
   }
 
   if(!req.files['thumb']) {

@@ -30,7 +30,9 @@ const ProductSchema = new Schema({
   slug: {
     type: String
   },
-  images: [{url: String}]
+  images: {
+    type: Array
+  }
 });
 
 ProductSchema.plugin(mongoosePaginate);
