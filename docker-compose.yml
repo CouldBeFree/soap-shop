@@ -12,6 +12,16 @@ services:
     volumes:
       - .:/app
       - soap-shop-tmp:/app/server/tmp
+  client:
+    container_name: client
+    build: /
+    image: soap-shop-backend
+    command: bash -c "cd / && npm run dev"
+    ports:
+      - 3000:3000
+    volumes:
+    - .:/app
+    - soap-shop-tmp:/app/client/tmp
 
 volumes:
   soap-shop-tmp:
