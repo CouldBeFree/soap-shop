@@ -57,7 +57,6 @@ exports.removeProduct = asyncHandler(async (req, res, next) => {
 exports.updateProduct = asyncHandler(async (req, res, next) => {
   let product = await Product.findById(req.params.id);
   let images = [];
-  let thumb = {};
   const files = req.files['images'];
   if(files && files.length){
     for(const image of files){
@@ -70,25 +69,20 @@ exports.updateProduct = asyncHandler(async (req, res, next) => {
   const imagesFromDB = product.images;
   if(imagesFromClient && Array.isArray(imagesFromClient)) {
     for(const image of imagesFromClient) {
-      images.push(JSON.parse(image));
+      images.unshift(JSON.parse(image));
     }
+  } else if (typeof imagesFromClient === 'string') {
+    images.unshift(JSON.parse(imagesFromClient));
   }
 
   if(imagesFromClient && imagesFromClient.length === imagesFromDB && imagesFromDB.length) {
     images = images.concat(imagesFromDB);
   }
 
-  if(!req.files['thumb']) {
-    thumb.url = product.thumb.url
-  } else {
-    thumb.url = req.files['thumb'][0].path
-  }
-
   const newProduct = {
     name: req.body.name,
     category: req.body.category,
     price: req.body.price,
-    thumb,
     images
   };
 
@@ -96,9 +90,11 @@ exports.updateProduct = asyncHandler(async (req, res, next) => {
     return next(new errorResponse(`No product with the id of ${req.params.id}`), 404)
   }
 
-  product = await Product.findOneAndUpdate({'_id': req.params.id}, newProduct, {
+  await Product.findOneAndUpdate({'_id': req.params.id}, newProduct, {
     runValidators: true
   });
+
+  product = await Product.findOne({'_id': req.params.id});
 
   res.status(200).json({
     success: true,

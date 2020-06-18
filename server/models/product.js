@@ -12,27 +12,22 @@ const ProductSchema = new Schema({
     type: String,
     required: [true, 'Category is required'],
     enum: [
-      'woman',
-      'man',
-      'baby-soap',
-      'bouquets',
-      'kits',
-      'natural'
+      'жіноче',
+      'чоловіче',
+      'дитяче',
+      'букети',
+      'набори',
+      'натуральне'
     ]
   },
   price: {
     type: Number,
     required: [true, 'Price is required'],
   },
-  thumb: {
-    url: String
-  },
   slug: {
     type: String
   },
-  images: {
-    type: Array
-  }
+  images: [ {url: String} ]
 });
 
 ProductSchema.plugin(mongoosePaginate);
