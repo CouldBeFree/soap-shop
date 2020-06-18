@@ -27,7 +27,7 @@ const ProductSchema = new Schema({
   slug: {
     type: String
   },
-  images: [ {url: String} ]
+  images: [ { path: String } ]
 });
 
 ProductSchema.plugin(mongoosePaginate);

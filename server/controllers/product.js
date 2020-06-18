@@ -7,23 +7,11 @@ const util = require('util');
 // @route POST api/v1/product/
 // @access Private
 exports.postProduct = asyncHandler(async (req, res) => {
-  const images = [];
-  const files = req.files['images'];
-  if(files && files.length){
-    for(const image of files){
-      const imageObj = { url: image.path };
-      images.push(imageObj);
-    }
-  }
 
   const product = {
     name: req.body.name,
     category: req.body.category,
-    price: req.body.price,
-    thumb: {
-      url: req.files['thumb'] ? req.files['thumb'][0].path : ''
-    },
-    images: images
+    price: req.body.price
   };
 
   const savedProduct = await Product.create(product);
@@ -58,32 +46,27 @@ exports.updateProduct = asyncHandler(async (req, res, next) => {
   let product = await Product.findById(req.params.id);
   let images = [];
   const files = req.files['images'];
-  if(files && files.length){
-    for(const image of files){
-      const imageObj = { url: image.path };
-      images.push(imageObj);
-    }
-  }
 
   const imagesFromClient = req.body.images;
-  const imagesFromDB = product.images;
-  if(imagesFromClient && Array.isArray(imagesFromClient)) {
-    for(const image of imagesFromClient) {
-      images.unshift(JSON.parse(image));
-    }
-  } else if (typeof imagesFromClient === 'string') {
-    images.unshift(JSON.parse(imagesFromClient));
-  }
 
-  if(imagesFromClient && imagesFromClient.length === imagesFromDB && imagesFromDB.length) {
-    images = images.concat(imagesFromDB);
+  if (files && !imagesFromClient) {
+    images = files
+  } else if (files && imagesFromClient) {
+    for(const image of imagesFromClient) {
+      images.push(JSON.parse(image));
+    }
+    images = [...images, ...files];
+  } else {
+    for(const image of imagesFromClient) {
+      images.push(JSON.parse(image));
+    }
   }
 
   const newProduct = {
     name: req.body.name,
     category: req.body.category,
     price: req.body.price,
-    images
+    images: images
   };
 
   if(!product) {
