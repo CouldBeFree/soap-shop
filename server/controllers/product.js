@@ -1,7 +1,7 @@
-const Product = require('../models/product');
-const asyncHandler = require('../middleware/async');
+const Product       = require('../models/product');
+const asyncHandler  = require('../middleware/async');
 const errorResponse = require('../utils/errorResponse');
-const util = require('util');
+const updateImages  = require('../utils/updateImages');
 
 // @desc Add a product
 // @route POST api/v1/product/
@@ -44,29 +44,17 @@ exports.removeProduct = asyncHandler(async (req, res, next) => {
 // @access Private
 exports.updateProduct = asyncHandler(async (req, res, next) => {
   let product = await Product.findById(req.params.id);
-  let images = [];
   const files = req.files['images'];
-
   const imagesFromClient = req.body.images;
 
-  if (files && !imagesFromClient) {
-    images = files
-  } else if (files && imagesFromClient) {
-    for(const image of imagesFromClient) {
-      images.push(JSON.parse(image));
-    }
-    images = [...images, ...files];
-  } else {
-    for(const image of imagesFromClient) {
-      images.push(JSON.parse(image));
-    }
-  }
+  const images = updateImages(files, imagesFromClient);
 
   const newProduct = {
     name: req.body.name,
     category: req.body.category,
     price: req.body.price,
-    images: images
+    images: images,
+    description: req.body.description
   };
 
   if(!product) {

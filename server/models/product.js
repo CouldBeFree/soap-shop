@@ -20,6 +20,9 @@ const ProductSchema = new Schema({
       'натуральне'
     ]
   },
+  description: {
+    type: String
+  },
   price: {
     type: Number,
     required: [true, 'Price is required'],
