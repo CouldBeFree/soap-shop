@@ -14,10 +14,10 @@ export const mutations = {
     state.user = user;
   },
   setError(state, error) {
-    state.error = error
+    state.error = error;
   },
   setToken(state, token) {
-    state.token = token
+    state.token = token;
   },
   setSubmitType(state, type) {
     state.submitType = type;
@@ -41,8 +41,4 @@ export const actions = {
         commit('setError', e.message);
       }
   }
-};
-
-export const getters = {
-
 };
