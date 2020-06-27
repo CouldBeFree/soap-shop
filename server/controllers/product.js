@@ -54,7 +54,8 @@ exports.updateProduct = asyncHandler(async (req, res, next) => {
     category: req.body.category,
     price: req.body.price,
     images: images,
-    description: req.body.description
+    description: req.body.description,
+    compare_at_price: req.body.compare_at_price
   };
 
   if(!product) {

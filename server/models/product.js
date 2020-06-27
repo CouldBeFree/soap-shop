@@ -27,6 +27,9 @@ const ProductSchema = new Schema({
     type: Number,
     required: [true, 'Price is required'],
   },
+  compare_at_price: {
+    type: Number
+  },
   slug: {
     type: String
   },
